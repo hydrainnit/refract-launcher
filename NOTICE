@@ -9,3 +9,21 @@ This product includes third-party components under their own licences:
   (assets/fonts/Inter-LICENSE.txt)
 - QR Code generator library (Java) — Copyright (c) Project Nayuki — MIT License
   (src/io/nayuki/qrcodegen)
+
+------------------------------------------------------------------------------
+
+Refract Launcher
+Modifications Copyright 2026 Hydrainnit
+
+Refract Launcher is a fork of Hume Launcher by Petrobot (above), released under the same
+Apache License, Version 2.0. The notices above are kept as they were.
+
+Additional third-party content in this fork:
+
+- Photographs from Pexels (https://www.pexels.com), used under the Pexels License
+  (https://www.pexels.com/license/). Each photographer is listed in assets/wallpapers/index.json
+  and ATTRIBUTIONS.md.
+- Movie data and images from TMDB. This product uses the TMDB API but is not endorsed or
+  certified by TMDB.
+
+Full credits: ATTRIBUTIONS.md (also in the app under Settings > About > Attributions).

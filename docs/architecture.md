@@ -53,7 +53,7 @@ source (Nayuki, MIT) under `src/io/nayuki/qrcodegen`.
   and Continue Watching uses published media sessions.
 
 - **Search without a list of services.** JustWatch says which services in India have a title and
-  gives each one's links; Hume finds the app for each service itself (the package in the Android
+  gives each one's links; Refract finds the app for each service itself (the package in the Android
   TV link, an installed non-browser handler of the web link, a remembered match, or an installed
   app with the same name), so new services need no update. Android 11+ hides other apps unless
   declared, so the manifest's `<queries>` lists launcher apps, voice input, the speech service
@@ -79,5 +79,36 @@ source (Nayuki, MIT) under `src/io/nayuki/qrcodegen`.
   caused ~1 s freezes moving to/from the dock).
 - Legibility gradients are baked into the wallpaper and artwork; the window background is removed
   to avoid hidden full-screen fills.
-- Measure with `adb shell dumpsys gfxinfo com.petrobot.hume` — dock navigation runs at a 16 ms
+- Measure with `adb shell dumpsys gfxinfo com.hydrainnit.refract` — dock navigation runs at a 16 ms
   median; full-screen transitions are limited by the GPU's fill rate (~30 fps on this box).
+
+## Refract additions
+
+Package and application ID: `com.hydrainnit.refract` (renamed from `com.petrobot.hume`; a new
+install, so settings from Hume are not carried over).
+
+| File | Role |
+|---|---|
+| `Theme.java` | Light / Dark colour tokens shared by every surface |
+| `Secrets.java` | API keys: Keystore AES-GCM (`refract_api_keys`), masked display, per-key status |
+| `Wallpapers.java` + `assets/wallpapers/` | Bundled Pexels photos (`index.json` metadata and credits), category lookup, sized decoding; the dormant Pexels API path is gated by `PEXELS_API_PAUSED` |
+| `Movies.java` | TMDB collections, logo and runtime lookups, disk caches; shared by Home theme, Movies tab and Ambient |
+| `MoviesPanel.java` | The Movies tab overlay |
+| `ClockView.java` | One clock for every style |
+| `Ambient.java`, `RefractDream.java` | The ambient screen, on idle Home and as a DreamService |
+| `tools/brand.py` | Draws the logo, icon and TV banner (Pillow) |
+
+**Memory and drawing.** Photos are decoded with `inSampleSize` to the screen width. Home keeps a
+single full-size photo bitmap and drops the reference (no `recycle()`) when it changes. Ambient
+keeps one image, or two only during a cross-fade, and on low-RAM TVs it cuts instead of fading.
+The Movies tab caps posters at 1/14 of the heap and keeps one backdrop. Everything decoding or on
+the network runs off the UI thread, with a generation check so stale results are dropped. Idle
+Home and the clock redraw once a minute, or once a second only when seconds are shown.
+
+**API key security.** Keys are never in source, logs or the repository, and are shown only masked.
+Encryption protects them at rest, but any key used by a client app can be extracted by someone
+who controls the device. That is why both keys are optional, personal and free.
+
+**Pexels licence.** The photos are bundled as built-in backgrounds of a launcher, with every
+photographer credited. The Pexels License allows this. It forbids selling unaltered copies or
+building a competing wallpaper service, and Refract does neither.

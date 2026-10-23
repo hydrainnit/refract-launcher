@@ -1,6 +1,6 @@
 # Features
 
-Everything Hume Launcher does, by area. For how the code is organised see
+Everything Refract Launcher does, by area. For how the code is organised see
 [architecture.md](architecture.md); to build it yourself see [getting-started.md](getting-started.md).
 
 - [First-time setup](#first-time-setup)
@@ -12,7 +12,7 @@ Everything Hume Launcher does, by area. For how the code is organised see
 
 ## First-time setup
 
-The first time Hume opens it walks through Apple-style pages, one question each (OK moves on, Back
+The first time Refract opens it walks through Apple-style pages, one question each (OK moves on, Back
 goes back):
 
 1. **Welcome**, fading through Indian and world languages, then *Get Started*.
@@ -21,7 +21,7 @@ goes back):
 4. **Your Home Screen** (this profile): Recommendations, News and Continue Watching on/off.
 5. **Weather**: use my location (shows the detected city), choose a city, or don't show weather.
 6. **Presentation** (whole TV): use Presentation; if on, *Start with the TV* and *Keep Screen Awake*.
-7. **Finish Setting Up**: Android's location prompt appears at once; make Hume the home screen and
+7. **Finish Setting Up**: Android's location prompt appears at once; make Refract the home screen and
    allow whatever else the TV supports (each ticks when done; unsupported ones are left out).
 8. **You're All Set** → Home.
 
@@ -58,7 +58,8 @@ Settings → Home → **Run setup again** repeats it. If Home is pressed mid-way
 | Carousel (Continue Watching item) | Right | Moves from **Resume** to **Remove** |
 | Status row | Left / Right | Weather pill ⇄ Refresh ⇄ Search ⇄ Control Center ⇄ avatar |
 | Anywhere on Home | Hold Back for 1 second | Opens Search (a short press of Back works as before) |
-| Anywhere on Home | Search key on remotes that have one | Opens Search and starts dictation |
+| Anywhere on Home (and the idle screen) | Voice / mic / Search key on the remote | The voice flow: edge glow, then the TV's assistant, else Search with dictation. Many TVs give `ASSIST`/`VOICE_ASSIST` straight to Google Assistant before any app sees it |
+| Now Playing pill | OK | Back to the app that is playing |
 | Anywhere on Home | Keyboard: type a letter or digit · `/` · Ctrl+F · Ctrl+K | Opens Search (with the letter typed) |
 | Status row | Down | Carousel (or dock) |
 | Anywhere | Home | Closes any overlay and goes to the first app in the dock |
@@ -85,7 +86,7 @@ The magnifier next to Control Center opens Search over the blurred Home Screen, 
 you typed at the top, a one-row keyboard under it, results below. Shortcuts: **hold Back** on any
 remote, the Search key on remotes that have one, or just start typing on a keyboard. (The
 Assistant/mic button on most Android TV remotes is taken by Google Assistant before any app sees
-it, so it can't open Hume's Search.)
+it, so it can't open Refract's Search.)
 
 - **Keyboard**: a–z, space, delete, **123** (digits and punctuation), **अआ** (Hindi letters) and
   clear. A USB/Bluetooth keyboard and the remote's number keys type too.
@@ -96,7 +97,7 @@ it, so it can't open Hume's Search.)
   English and Hindi (Indian English, with Hindi as a second language).
 - **Before typing**: your recent searches (per profile) and what's trending in the carousel.
 - **Apps & Settings** (instant, no internet): installed apps including hidden ones, TV inputs
-  ("HDMI 2"), Hume screens (Control Center, Weather, Switch Profile, Hume Settings) and TV settings
+  ("HDMI 2"), Refract screens (Control Center, Weather, Switch Profile, Refract Settings) and TV settings
   ("wifi", "bluetooth", "screensaver"…).
 - **Movies & TV**: every title on any streaming service in India from JustWatch — Hindi and
   regional titles included, and searches typed in Hindi (पंचायत) work — as posters with the logos
@@ -107,7 +108,7 @@ it, so it can't open Hume's Search.)
   summary) with a button per app: **▶ Open in …** for apps you have (straight to the title where
   the app allows it) and **Get …** for the rest (the app's Play Store page), each marked
   *Subscription*, *Free*, *Free with ads*, *Rent* or *Buy*.
-- **Any service, no list**: Hume matches each service to its app itself — the app named in the
+- **Any service, no list**: Refract matches each service to its app itself — the app named in the
   service's Android TV link, an installed app that opens the service's website, or an installed
   app with the same name — so new services work without an update.
 - Settings → Home → Search: turn Movies & TV results off, or clear recent searches. Searches go
@@ -154,10 +155,13 @@ summary at the bottom. The first key press only brings the Home Screen back.
 
 ## Weather
 
-- A small glass **weather pill** in the top-left corner: icon, temperature, condition, city and
-  today's high/low. OK opens the forecast: current conditions, humidity and wind, the next six
-  hours, and a 5-day list with temperature range bars (blue → red, a dot for now), as in Apple
-  Weather.
+- A glass **weather pill** in the top-left corner, the same height as the status pill and level
+  with it: icon, temperature, condition, city and today's high/low. Its width follows the text; a
+  long city name is shortened with an ellipsis so text never touches the edge.
+- **Focus the pill and it grows into an Apple Weather-style card** in place: the city (with a
+  location arrow when it was found automatically), large temperature, condition and H/L, the next
+  six hours, and a 5-day list with temperature range bars (blue → red). Moving focus away or Back
+  shrinks it again; OK refreshes. The morph is drawn only (no relayout), about a quarter second.
 - Free sources with no key: [Open-Meteo](https://open-meteo.com) (default),
   [MET Norway](https://api.met.no) and [wttr.in](https://wttr.in); the chosen one first, the others
   as fallbacks. The panel shows which answered and when.
@@ -208,8 +212,8 @@ loop, optionally starting with the TV (signage). See **[presentation.md](present
 
 ## Screensaver
 
-Hume never holds the screen on, so the TV's own screensaver (e.g. Aerial Views) starts after the
-TV's timeout. Settings → Home → **Screensaver on Home**: *System screensaver* (default) or *Hume
+Refract never holds the screen on, so the TV's own screensaver (e.g. Aerial Views) starts after the
+TV's timeout. Settings → Home → **Screensaver on Home**: *System screensaver* (default) or *Refract
 full-screen carousel*, which keeps the screen on and lets the carousel play instead. Also shows the
 TV's screensaver (opens its settings or app) and **Start screensaver now**.
 
@@ -219,11 +223,11 @@ Android TV can't receive AirPlay by itself. Install the free, open-source
 **[AirPlay Server](https://github.com/jqssun/android-airplay-server)** app
 (`io.github.jqssun.airplay`, GPL-3.0) and the TV shows up in AirPlay on Macs, iPhones and iPads for
 screen mirroring, video and audio. See [install.md](install.md#optional-airplay-receiver) to set it
-up. It appears in Hume like any other app.
+up. It appears in Refract like any other app.
 
 **AirPlay guard** (automatic, only when that app is installed): after long sleeps the AirPlay app
 can keep running without announcing itself, so the TV vanishes from AirPlay lists. On wake, when
-the network returns and every 15 minutes on Home, Hume asks the network (an mDNS query, as a Mac
+the network returns and every 15 minutes on Home, Refract asks the network (an mDNS query, as a Mac
 does) whether the receiver is visible; if not, it restarts the receiver's server through the app's
 settings receiver, or starts a stopped app through its start-up receiver. Nothing appears on screen.
 The receiver's name is set in the AirPlay app (e.g. "Mi Box").
@@ -245,15 +249,15 @@ the TV's own settings.
 
 ## Permissions
 
-Hume asks on screen wherever the TV allows it; adb is only a last resort.
+Refract asks on screen wherever the TV allows it; adb is only a last resort.
 
 | Feature | How it is granted |
 |---|---|
 | Wi-Fi name (location) | Android's permission prompt |
-| Continue Watching & Do Not Disturb | The system notification-access screen. Not possible on low-RAM (1 GB) TVs, where Android disables it — Hume says so |
-| Power Off & Sleep Timer | Android's "Activate device admin app?" screen; where device admin is switched off (e.g. Mi Box), Hume's accessibility switch **Hume Launcher – Power Off** in the TV's Accessibility settings (opened for you). The same switch lets Clean close apps |
+| Continue Watching & Do Not Disturb | The system notification-access screen. Not possible on low-RAM (1 GB) TVs, where Android disables it — Refract says so |
+| Power Off & Sleep Timer | Android's "Activate device admin app?" screen; where device admin is switched off (e.g. Mi Box), Refract's accessibility switch **Refract Launcher – Power Off** in the TV's Accessibility settings (opened for you). The same switch lets Clean close apps |
 | Search dictation (microphone) | Android's permission prompt the first time the mic is used; without it, the TV's voice prompt is used |
-| Home screen | Android 10+ "default home app" prompt, the TV's Home-app settings, or Android's chooser; Hume offers this once if another launcher is home |
+| Home screen | Android 10+ "default home app" prompt, the TV's Home-app settings, or Android's chooser; Refract offers this once if another launcher is home |
 
 Only when a TV has none of these screens is the one-time adb command shown.
 
@@ -261,3 +265,110 @@ Only when a TV has none of these screens is the one-time adb command shown.
 
 All sizes are relative to the screen's resolution (a 960×540 design grid), so the layout keeps its
 proportions on 720p, 1080p and 4K and rebuilds itself if the display changes.
+
+---
+
+# New in Refract
+
+## Appearance (Light and Dark)
+
+Setup's second page shows a Light and a Dark preview of Home. Focusing one restyles the page at
+once, and the choice is TV-wide (`appearance` prefs). Settings → Appearance changes it later.
+Light uses frosted white glass with dark text and lifts focused rows on a white plate with a
+shadow. Dark is the original smoked glass. Home, Control Center, Setup, Settings, the Movies tab
+and Refract Ambient all read the same tokens (`Theme.java`). Search and its How to Watch sheet are
+still dark in both modes.
+
+## Backgrounds (Pexels photographs)
+
+18 photographs in 9 categories (Landscapes, Deserts, Oceans, Forests, Cities, Minimal, Abstract,
+Night, Cinematic), each tagged as suited to Light or Dark, replace the preset gradients. Existing
+profiles that chose a gradient keep it. The photo appears **only behind the app grid**: when focus
+moves from the dock row down into the grid, in the More Apps folder, or when the carousel is
+empty. The carousel above the dock is untouched. A legibility veil matching the appearance is baked
+into the photo once. Choose one in setup or under Settings → Home → Background, where moving
+through the list previews the photo. Every photo is credited on screen and in Attributions.
+
+## Movies tab and Movies Home Theme
+
+The film icon in the status pill opens **Movies**: a featured backdrop with the film's title logo
+(or its title in type when TMDB has none), TMDB rating, release date, genres, runtime and overview,
+and rows of posters (Trending, Popular, Top Rated, Coming Soon, Action, Comedy, Science Fiction,
+Animation). The featured film changes 300 ms after you stop moving. OK looks the film up in
+Search, which lists the apps that have it.
+
+**Movies Home Theme** (setup, or Settings → Movies) puts the same featured films behind Home:
+full-screen backdrop, logo, overview, rating and date above the dock. News and recommendations are
+hidden while it is on; their settings are untouched and they come back when it is off. The film
+changes only when you move, unless you choose an interval. Without a TMDB key, both say so and
+offer Settings. Lists are cached for 6 hours and logos are cached permanently.
+
+## Refract Ambient (screensaver)
+
+Photos (cycling within a category, by default the background's), Movies (TMDB backdrops with
+logo, rating and date), a Single Photo, or Minimal (clock only). It shows an oversized
+glass-gradient clock, the weather, a description and the photo credit. Settings → Screensaver &
+Clock covers when it starts (Refract Ambient, the full-screen carousel, or the system screensaver),
+interval, transition, reduce motion, burn-in drift (all content moves together within ±18×12 dp
+once a minute), dimming, and the clock: style (Cinematic, Centred, Minimal, Stacked, Analog), font,
+position, size, opacity, letter spacing, nudge, 12/24-hour, seconds and date. It is also a real
+DreamService, so it can be the TV's own screensaver (TV Settings → Screen saver → *Refract
+Ambient*).
+
+## Status pill, Assistant and Control Center
+
+The status row is a single floating glass pill: connection, time, voice (Google Assistant), Movies,
+Search, Control Center and the profile avatar. The voice button plays a short edge glow, then
+opens the TV's assistant (`ASSIST`, then `VOICE_ASSIST`, web search, global search), falling back
+to Refract's Search with dictation. Nothing listens until you press it.
+
+Control Center is one tinted glass panel: a large **Power Off** tile, **Wi-Fi** and **Do Not
+Disturb**, **Audio** and **Sleep Timer**, **Memory** (OK cleans), and round shortcuts for
+controllers, accessibility (or Inputs on TVs that have them), Settings and Refresh. Tiles that are
+on get a coloured glyph, and the focused tile turns white.
+
+## Now Playing
+
+While an app plays audio in the background (Spotify, Amazon Music, YouTube, any app with a media
+session), a small pill appears left of the status pill with the album art (or the app's icon) and
+a waveform in the art's colour, like the iPhone's Dynamic Island. It is black in Dark appearance
+and white glass in Light. OK opens the playing app; it hides 8 seconds after playback pauses.
+
+- Needs **notification access** (the same access Continue Watching uses), since Android only shares
+  media sessions with a notification listener. Without it the pill never shows.
+- The waveform is an animated level indicator, not an analysis of the sound (that would need the
+  microphone). It draws ~15 frames a second only while music plays and Home is visible, pauses
+  while you press keys so navigation keeps every frame, and stops completely on pause, in the
+  screensaver and when an app is open. Reduce Motion shows still bars.
+
+## API & Content Services
+
+Optional keys, offered in setup (skippable) and in Settings → API & Content Services: TMDB (v3 key
+or v4 token) and Pexels. Keys are typed hidden (Show reveals them), stored encrypted with an
+Android Keystore AES-GCM key, and only ever shown masked. TMDB can be tested. Its status is one of
+not configured, unverified, valid, invalid, rate-limited, network error or service unavailable, and
+an outage is never reported as a bad key. The Pexels API is paused, so a Pexels key is saved but not
+checked or used, and no Pexels requests are made.
+
+## Attributions
+
+Settings → About → Attributions lists the original app (Hume Launcher by Petrobot), fonts, code,
+every photographer, and the data and weather services. The same list is in
+[ATTRIBUTIONS.md](../ATTRIBUTIONS.md).
+
+## Settings choices, tvOS-style
+
+Choosing a value in Settings no longer opens an Android dialog. The options replace the page's
+rows on the right with the current one ticked, the left side shows what you are choosing, OK
+picks, and Back returns to the row you came from. Text entry (city search, API keys) and multi-
+select lists (streaming services, languages, newsrooms) work the same way.
+
+## Responsiveness
+
+- An untouched Home draws no frames: the focused card's sway settles after two cycles (~10 s).
+- Apps are asked to start 140 ms into the launch zoom, so their start-up overlaps the animation.
+- The grid photo stays decoded while Home is in use (dropped on low-RAM TVs, on memory pressure
+  and when Home stops), so moving between dock and grid never waits for a decode.
+- Glyph icons are cached, so focus changes in Control Center only repaint.
+- Measured on the 1080p emulator: dock navigation p50 17 ms / p99 18 ms with or without music
+  playing; idle Home with nothing playing draws 0 frames.

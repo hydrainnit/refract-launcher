@@ -1,5 +1,5 @@
 #!/bin/bash
-# Builds and signs build/tvos-home.apk with plain SDK tools (no Gradle).
+# Builds and signs build/refract-launcher.apk with plain SDK tools (no Gradle).
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -38,17 +38,17 @@ javac -encoding UTF-8 --release 11 -classpath "$JAR" \
 if [ -n "${RELEASE_KEYSTORE:-}" ]; then
     [ -n "${RELEASE_KEYSTORE_PASS:-}" ] || { echo "Set RELEASE_KEYSTORE_PASS for $RELEASE_KEYSTORE" >&2; exit 1; }
     "$BT/apksigner" sign --ks "$RELEASE_KEYSTORE" --ks-pass env:RELEASE_KEYSTORE_PASS \
-        --ks-key-alias "${RELEASE_KEY_ALIAS:-hume-release}" --out build/tvos-home.apk build/aligned.apk
+        --ks-key-alias "${RELEASE_KEY_ALIAS:-refract-release}" --out build/refract-launcher.apk build/aligned.apk
     echo "Signed with the release key"
 else
     KS=debug.keystore
     if [ ! -f "$KS" ]; then
         keytool -genkeypair -keystore "$KS" -storepass android -keypass android -alias debug \
-            -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Hume Launcher debug" >/dev/null
+            -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Refract Launcher debug" >/dev/null
     fi
     "$BT/apksigner" sign --ks "$KS" --ks-pass pass:android --key-pass pass:android \
-        --out build/tvos-home.apk build/aligned.apk
+        --out build/refract-launcher.apk build/aligned.apk
     echo "Signed with the local debug key (development build)"
 fi
 
-echo "Built build/tvos-home.apk"
+echo "Built build/refract-launcher.apk"

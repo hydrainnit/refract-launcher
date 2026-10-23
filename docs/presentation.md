@@ -4,7 +4,7 @@
 
 Presentation turns the TV into a signage screen you control from any browser on the same network.
 Upload images and videos, add webpages, arrange them in a playlist, and the TV loops through them
-full screen. It is a built-in feature of Hume Launcher, ported from **PB Marketer TV**
+full screen. It is a built-in feature of Refract Launcher, ported from **PB Marketer TV**
 (`pb-marketer-tv`) with the same playback logic and web API.
 
 **Removed from the original** (by request): the admin/upload lock PIN, the debug telemetry panel
@@ -103,6 +103,6 @@ webpageScrollPauseSec (0–300), enabled, order`.
 
 ## Storage
 
-Same layout as the original app, inside Hume Launcher's private storage: `signage.db` (tables
+Same layout as the original app, inside Refract Launcher's private storage: `signage.db` (tables
 `media`, `playlists`) and uploaded files in `files/media/<uuid>.<ext>`. Uploads are streamed to
 disk, so large videos don't use much memory.

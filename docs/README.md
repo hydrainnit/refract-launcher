@@ -1,6 +1,6 @@
-# Hume Launcher documentation
+# Refract Launcher documentation
 
-Hume Launcher (`com.petrobot.hume`) replaces the Android TV home screen with one modelled on
+Refract Launcher (`com.hydrainnit.refract`) replaces the Android TV home screen with one modelled on
 Apple tvOS 26. Every element was measured against Apple's own tvOS 26 screenshots and the Human
 Interface Guidelines, then tuned to run at 60 fps on a low-end Mali-450 GPU.
 
@@ -15,7 +15,7 @@ Interface Guidelines, then tuned to run at 60 fps on a low-end Mali-450 GPU.
 
 - **[Getting started](getting-started.md)** — install the tools, build, run on a TV or the
   emulator, developer shortcuts, troubleshooting.
-- **[Features](features.md)** — everything Hume does: setup, Home, carousel, weather, Control
+- **[Features](features.md)** — everything Refract does: setup, Home, carousel, weather, Control
   Center, profiles, inputs, search, screensaver, AirPlay guard, settings, permissions.
 - **[Install and set up](install.md)** — make it the home screen, one-time permissions, undo.
 - **[Presentation mode](presentation.md)** — sending content from a browser, the TV player,

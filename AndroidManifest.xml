@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.petrobot.hume">
+    package="com.hydrainnit.refract">
 
     <uses-feature android:name="android.software.leanback" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
@@ -43,7 +43,7 @@
     </queries>
 
     <application
-        android:label="Hume Launcher"
+        android:label="Refract Launcher"
         android:icon="@drawable/ic_launcher"
         android:banner="@drawable/banner"
         android:theme="@style/HomeTheme"
@@ -73,7 +73,7 @@
         <receiver
             android:name=".SleepReceiver$Admin"
             android:exported="true"
-            android:label="Hume Launcher sleep"
+            android:label="Refract Launcher sleep"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data android:name="android.app.device_admin" android:resource="@xml/device_admin" />
             <intent-filter>
@@ -84,7 +84,7 @@
         <service
             android:name=".PowerService"
             android:exported="true"
-            android:label="Hume Launcher – Power Off"
+            android:label="Refract Launcher – Power Off"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -96,10 +96,22 @@
         <service
             android:name=".MediaWatchService"
             android:exported="true"
-            android:label="Hume Launcher – Continue Watching"
+            android:label="Refract Launcher – Continue Watching"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
                 <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <!-- Refract Ambient: the photo / movie clock screensaver, selectable as the TV's screen saver. -->
+        <service
+            android:name=".RefractDream"
+            android:exported="true"
+            android:label="Refract Ambient"
+            android:permission="android.permission.BIND_DREAM_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.dreams.DreamService" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
 
@@ -122,6 +134,7 @@
         <activity
             android:name=".SetupActivity"
             android:exported="true"
+            android:launchMode="singleTop"
             android:excludeFromRecents="true"
             android:screenOrientation="landscape"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|smallestScreenSize|screenLayout|uiMode|density" />
