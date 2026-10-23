@@ -72,6 +72,17 @@ final class Perms {
         if (!hasLocation(a)) a.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQ_LOCATION);
     }
 
+    /** Clean can only force-stop apps through Refract's accessibility switch: offer to turn it on. */
+    static void requestForceStop(Activity a) {
+        Intent acc = accessibilityScreen(a);
+        new AlertDialog.Builder(a, android.R.style.Theme_DeviceDefault_Dialog_Alert)
+                .setTitle("Close apps fully")
+                .setMessage("Android only lets Refract free background memory. To close apps the way Force stop does, "
+                        + "choose \u201cRefract Launcher \u2013 Power Off\u201d in the next screen and turn it on.")
+                .setPositiveButton("Open Accessibility", (d, w) -> tryStart(a, acc))
+                .setNegativeButton("Not Now", null).show();
+    }
+
     static void requestAdmin(Activity a) {
         if (hasAdmin(a)) return;
         if (!adminSupported(a)) {
@@ -87,8 +98,8 @@ final class Perms {
             Intent acc = accessibilityScreen(a);
             new AlertDialog.Builder(a, android.R.style.Theme_DeviceDefault_Dialog_Alert)
                     .setTitle("Turn on Power Off")
-                    .setMessage("In the next screen, choose \u201cHume Launcher \u2013 Power Off\u201d and turn it on. "
-                            + "It only lets Refract put the TV to sleep.")
+                    .setMessage("In the next screen, choose \u201cRefract Launcher \u2013 Power Off\u201d and turn it on. "
+                            + "It only lets Refract put the TV to sleep and close apps.")
                     .setPositiveButton("Open Accessibility", (d, w) -> tryStart(a, acc))
                     .setNegativeButton("Cancel", null).show();
             return;

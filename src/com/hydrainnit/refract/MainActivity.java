@@ -3647,6 +3647,12 @@ public class MainActivity extends Activity {
         for (String p : getSharedPreferences("clean", MODE_PRIVATE).getString("recent", "").split(",")) {
             if (!p.isEmpty() && Suggestions.installed(this, p)) l.add(p);
         }
+        // Apps still holding a media session (music or video left running in the background),
+        // however they were opened.
+        for (android.media.session.MediaController mc : npWatched) {
+            String p = mc.getPackageName();
+            if (!p.equals(getPackageName()) && !l.contains(p)) l.add(p);
+        }
         return l;
     }
 
@@ -3670,13 +3676,25 @@ public class MainActivity extends Activity {
                 // not allowed for this one
             }
         }
+        boolean force = PowerService.instance != null;
         Runnable done = () -> {
             getSharedPreferences("clean", MODE_PRIVATE).edit().remove("recent").apply();
             long freed = Math.max(0, availMem(am) - before) / (1024 * 1024);
             updateMemoryBar();
-            toast("Closed " + apps.size() + (apps.size() == 1 ? " app" : " apps") + (freed > 0 ? " \u00b7 freed " + freed + " MB" : ""));
+            String mb = freed > 0 ? " \u00b7 freed " + freed + " MB" : "";
+            if (force) {
+                toast("Closed " + apps.size() + (apps.size() == 1 ? " app" : " apps") + mb);
+            } else {
+                // Without the accessibility switch Android only drops background memory; apps that
+                // are playing or have a running service stay open, so don't claim they closed.
+                toast("Freed background memory" + mb + ". To close apps fully, turn on Refract\u2019s Power Off switch.");
+                if (!getSharedPreferences("clean", MODE_PRIVATE).getBoolean("asked_force", false)) {
+                    getSharedPreferences("clean", MODE_PRIVATE).edit().putBoolean("asked_force", true).apply();
+                    Perms.requestForceStop(this);
+                }
+            }
         };
-        if (PowerService.instance != null) {
+        if (force) {
             closeProfilePicker();
             PowerService.forceStop(this, apps, () -> handler.postDelayed(done, 600));
         } else {
@@ -4762,12 +4780,16 @@ public class MainActivity extends Activity {
             int[] b = new int[2];
             v.getLocationOnScreen(b);
             float dx = b[0] + v.getWidth() / 2f - ax, dy = b[1] + v.getHeight() / 2f - ay;
+            // Sideways distance to the cell's edge, not its centre: a wide cell (Memory) right
+            // below is the next one down even though its centre is off to the side.
+            float gapX = Math.max(0, Math.max(b[0] - ax, ax - (b[0] + v.getWidth())));
+            float gapY = Math.max(0, Math.max(b[1] - ay, ay - (b[1] + v.getHeight())));
             float main, cross;
             switch (keyCode) {
-                case KeyEvent.KEYCODE_DPAD_LEFT: main = -dx; cross = dy; break;
-                case KeyEvent.KEYCODE_DPAD_RIGHT: main = dx; cross = dy; break;
-                case KeyEvent.KEYCODE_DPAD_UP: main = -dy; cross = dx; break;
-                default: main = dy; cross = dx; break;
+                case KeyEvent.KEYCODE_DPAD_LEFT: main = -dx; cross = gapY; break;
+                case KeyEvent.KEYCODE_DPAD_RIGHT: main = dx; cross = gapY; break;
+                case KeyEvent.KEYCODE_DPAD_UP: main = -dy; cross = gapX; break;
+                default: main = dy; cross = gapX; break;
             }
             if (main <= dp(4)) continue;
             float score = main + Math.abs(cross) * 2.2f;
