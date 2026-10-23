@@ -7,7 +7,7 @@ A tvOS 26–style home screen for Android TV, **made by Hydrainnit**. It is a fo
 builds on (see [Attributions](ATTRIBUTIONS.md)). It replaces the stock launcher with one modelled on
 Apple TV: glass dock, full-screen carousel, Control Center and profiles. It is built to stay smooth
 on low-end TV boxes like the Xiaomi Mi Box. Plain Java, no Gradle, no third-party runtime
-libraries. The APK is about 4 MB, 2.6 MB of which is bundled photographs.
+libraries. The APK is about 6 MB, 4.6 MB of which is bundled 1920×1080 photographs.
 
 Application ID: `com.hydrainnit.refract`.
 

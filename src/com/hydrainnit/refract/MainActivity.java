@@ -910,7 +910,7 @@ public class MainActivity extends Activity {
         Wallpapers.Photo p = Wallpapers.byId(this, style.substring(Wallpapers.PHOTO.length()));
         if (p == null) return;
         int gen = ++photoGen;
-        int maxW = Math.min(lowRam ? 1280 : 1600, screenW);
+        int maxW = Math.min(1920, screenW);  // the bundled photos are 1920x1080: full detail on a 1080p UI
         photoLoading = true;
         io.execute(() -> {
             Bitmap b = Wallpapers.decode(this, p, maxW);

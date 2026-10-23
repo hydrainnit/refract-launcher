@@ -331,7 +331,7 @@ final class Ambient extends FrameLayout {
     }
 
     int decodeWidth() {
-        return Math.min(lowRam ? 1280 : 1600, screenW);
+        return Math.min(1920, screenW);  // the bundled photos are 1920x1080
     }
 
     // ---------------------------------------------------------------- photos

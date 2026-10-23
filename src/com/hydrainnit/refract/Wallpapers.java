@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * Photographic wallpapers. A starter set of Pexels photos ships in the APK (assets/wallpapers,
- * 1600x900 WebP, ~2.6 MB, with their metadata in index.json) so wallpapers work offline and with
+ * 1920x1080 WebP, ~4.6 MB, with their metadata in index.json) so wallpapers work offline and with
  * no API key. A remote Pexels source uses the same Photo model and is off by default: Pexels API
  * access is paused, so nothing here makes a request unless PEXELS_API_PAUSED is false, the user
  * saved a key and switched remote wallpapers on.
@@ -171,7 +171,7 @@ final class Wallpapers {
     // ------------------------------------------------------------------ decoding
 
     /**
-     * Decodes one photo no wider than maxWidth (a power-of-two sample of the 1600 px file), off the
+     * Decodes one photo no wider than maxWidth (a power-of-two sample of the 1920 px file), off the
      * UI thread. The caller owns the bitmap and drops it when it is no longer shown.
      */
     static Bitmap decode(Context c, Photo p, int maxWidth) {

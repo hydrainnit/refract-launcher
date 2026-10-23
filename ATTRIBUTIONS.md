@@ -20,7 +20,7 @@ Original repository: <https://github.com/petrobot-admin/hume-launcher>. Thank yo
 ## Photographs
 
 18 photographs from [Pexels](https://www.pexels.com), bundled in `assets/wallpapers/`
-(re-encoded as 1600×900 WebP), used under the [Pexels License](https://www.pexels.com/license/):
+(re-encoded as 1920×1080 WebP), used under the [Pexels License](https://www.pexels.com/license/):
 free to use and modify, attribution appreciated rather than required. Refract credits every
 photographer anyway. The photos are built-in backgrounds for this launcher. The app is not a
 wallpaper download service and does not sell or redistribute the photos on their own, which the

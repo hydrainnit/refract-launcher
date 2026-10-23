@@ -118,6 +118,7 @@ final class SearchPanel {
         head.setOrientation(LinearLayout.HORIZONTAL);
         head.setGravity(Gravity.CENTER_VERTICAL);
         head.setClipChildren(false);
+        head.setClipToPadding(false);  // the mic grows on focus and with your voice; never cut it off
         head.setPadding(a.dockOuter, a.dp(30), a.dockOuter, 0);
         if (voice || live) {
             mic = new ImageView(a);
