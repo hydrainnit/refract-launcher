@@ -320,9 +320,11 @@ Photos (cycling within a category, by default the background's), Movies (TMDB ba
 logo, rating and date), a Single Photo, or Minimal (clock only). It shows an oversized
 glass-gradient clock, the weather, a description and the photo credit. Settings → Screensaver &
 Clock covers when it starts (Refract Ambient, the full-screen carousel, or the system screensaver),
-interval, transition, reduce motion, burn-in drift (all content moves together within ±18×12 dp
-once a minute), dimming, and the clock: style (Cinematic, Centred, Minimal, Stacked, Analog), font,
-position, size, opacity, letter spacing, nudge, 12/24-hour, seconds and date. It is also a real
+interval, transition, reduce motion, burn-in drift (on by default: once a minute the clock, weather
+and text each glide to a new spot within ±18×12 dp of where they sit, a fade instead with Reduce
+Motion), dimming, and the clock: style (Cinematic, Centred, Minimal, Stacked, Analog), font,
+position (Top, Centre, Top Left, Top Right, Bottom Left, Bottom Right), size, opacity, letter
+spacing, nudge, 12/24-hour, seconds and date. It is also a real
 DreamService, so it can be the TV's own screensaver (TV Settings → Screen saver → *Refract
 Ambient*).
 

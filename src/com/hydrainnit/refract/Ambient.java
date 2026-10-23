@@ -91,8 +91,8 @@ final class Ambient extends FrameLayout {
         return c.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
     }
 
-    static final String[] POSITIONS = {"top", "center", "top_left", "bottom_left", "bottom_right"};
-    static final String[] POSITION_NAMES = {"Top", "Centre", "Top Left", "Bottom Left", "Bottom Right"};
+    static final String[] POSITIONS = {"top", "center", "top_left", "top_right", "bottom_left", "bottom_right"};
+    static final String[] POSITION_NAMES = {"Top", "Centre", "Top Left", "Top Right", "Bottom Left", "Bottom Right"};
 
     final Settings s;
     final Theme theme;
@@ -156,6 +156,7 @@ final class Ambient extends FrameLayout {
         switch (s.clockPos) {
             case "center": clp.gravity = Gravity.CENTER; break;
             case "top_left": clp.gravity = Gravity.TOP | Gravity.START; clp.leftMargin = sideM; clp.topMargin = topM; break;
+            case "top_right": clp.gravity = Gravity.TOP | Gravity.END; clp.rightMargin = sideM; clp.topMargin = topM; break;
             case "bottom_left": clp.gravity = Gravity.BOTTOM | Gravity.START; clp.leftMargin = sideM; clp.bottomMargin = topM; break;
             case "bottom_right": clp.gravity = Gravity.BOTTOM | Gravity.END; clp.rightMargin = sideM; clp.bottomMargin = topM; break;
             default: clp.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL; clp.topMargin = dp(46); break;
