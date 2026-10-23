@@ -79,14 +79,14 @@ final class WeatherView extends View {
             pillTop = "Weather";
             pillSub = "";
             size(12, medium);
-            pillW = pad + p.measureText("Getting the weather…") + endPad;
+            pillW = pad + p.measureText("Getting the weather\u2026") + endPad;
             return;
         }
-        pillTemp = d.temp + "°";
+        pillTemp = d.temp + "\u00b0";
         size(20, regular);
         float tw = p.measureText(pillTemp);
         pillTop = Weather.describe(d.code, d.day);
-        String hl = "H:" + d.max + "° L:" + d.min + "°";
+        String hl = "H:" + d.max + "\u00b0 L:" + d.min + "\u00b0";
         size(11.5f, semibold);
         float topW = p.measureText(pillTop);
         size(11.5f, medium);
@@ -157,7 +157,7 @@ final class WeatherView extends View {
     private void drawPill(Canvas c, float a) {
         float h = pillHeight(), pad = 14 * u, is = 26 * u;
         if (data == null) {
-            text(c, "Getting the weather…", pad, h / 2f + 4 * u, 12, medium, 0.7f * a, Paint.Align.LEFT);
+            text(c, "Getting the weather\u2026", pad, h / 2f + 4 * u, 12, medium, 0.7f * a, Paint.Align.LEFT);
             return;
         }
         icon(c, data.code, data.day, pad, (h - is) / 2f, is, a);
@@ -179,10 +179,10 @@ final class WeatherView extends View {
                 TextUtils.TruncateAt.END).toString();
         float pw = text(c, place, x0, pad + 15 * u, 16, semibold, a, Paint.Align.LEFT);
         if (located) drawArrow(c, x0 + pw + 6 * u, pad + 4 * u, 11 * u, a);
-        text(c, d.temp + "°", x0 - 2 * u, pad + 78 * u, 56, regular, a, Paint.Align.LEFT);
+        text(c, d.temp + "\u00b0", x0 - 2 * u, pad + 78 * u, 56, regular, a, Paint.Align.LEFT);
         icon(c, d.code, d.day, x1 - 26 * u, pad - 2 * u, 26 * u, a);
         text(c, Weather.describe(d.code, d.day), x1, pad + 52 * u, 14.5f, semibold, a, Paint.Align.RIGHT);
-        text(c, "H:" + d.max + "° L:" + d.min + "°", x1, pad + 70 * u, 14, semibold, a, Paint.Align.RIGHT);
+        text(c, "H:" + d.max + "\u00b0 L:" + d.min + "\u00b0", x1, pad + 70 * u, 14, semibold, a, Paint.Align.RIGHT);
 
         // Next hours.
         float y = pad + 92 * u;
@@ -194,7 +194,7 @@ final class WeatherView extends View {
             float hx = x0 + hw * (i + 0.5f);
             text(c, hr.label, hx, y + 22 * u, 12, semibold, 0.72f * a, Paint.Align.CENTER);
             icon(c, hr.code, hr.day, hx - 12 * u, y + 31 * u, 24 * u, a);
-            text(c, hr.temp + "°", hx, y + 76 * u, 15, semibold, a, Paint.Align.CENTER);
+            text(c, hr.temp + "\u00b0", hx, y + 76 * u, 15, semibold, a, Paint.Align.CENTER);
         }
 
         // 5-day list with range bars coloured from cool to hot.
@@ -216,8 +216,8 @@ final class WeatherView extends View {
             float ry = y + 8 * u + row * i, base = ry + row / 2f + 5 * u;
             text(c, day.label, x0, base, 15, semibold, a, Paint.Align.LEFT);
             icon(c, day.code, true, x0 + 72 * u, ry + 3 * u, 25 * u, a);
-            text(c, day.min + "°", by0 - 12 * u, base, 15, semibold, 0.45f * a, Paint.Align.RIGHT);
-            text(c, day.max + "°", x1, base, 15, semibold, a, Paint.Align.RIGHT);
+            text(c, day.min + "\u00b0", by0 - 12 * u, base, 15, semibold, 0.45f * a, Paint.Align.RIGHT);
+            text(c, day.max + "\u00b0", x1, base, 15, semibold, a, Paint.Align.RIGHT);
             float cy = ry + row / 2f, th = 5 * u;
             bar.setShader(null);
             bar.setColor((ink & 0xFFFFFF) | 0x22000000);
