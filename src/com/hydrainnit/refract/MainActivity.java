@@ -1985,7 +1985,7 @@ public class MainActivity extends Activity {
         List<Suggestions.Item> pre = moviesTheme ? items.subList(0, Math.min(3, items.size())) : items;
         io.execute(() -> {
             for (Suggestions.Item it : pre) {
-                Suggestions.image(this, it.backdrop, "w1280", 64);
+                Suggestions.image(this, it.backdrop, "original", 64);
                 if (it.providerId == Movies.TMDB_MOVIE) Movies.logoFor(this, it);
                 else Suggestions.logoFor(this, it);
             }
@@ -2037,11 +2037,11 @@ public class MainActivity extends Activity {
         }
         int want = index;
         io.execute(() -> {
-            Bitmap raw = Suggestions.image(this, it.backdrop, "w1280", Math.min(1280, screenW));
+            Bitmap raw = Suggestions.image(this, it.backdrop, "original", lowRam ? Math.min(1280, screenW) : screenW);
             Bitmap bd = "news".equals(it.type) ? bakeNews(raw) : bakeScrims(raw);
             Bitmap bdBlur = Ui.glassBackdrop(bd, 160, 90);
             String logoPath = it.providerId == Movies.TMDB_MOVIE ? Movies.logoFor(this, it) : Suggestions.logoFor(this, it);
-            Bitmap logo = logoPath.isEmpty() ? null : Suggestions.image(this, logoPath, "w500", 500);
+            Bitmap logo = logoPath.isEmpty() ? null : Suggestions.image(this, logoPath, "original", 960);
             handler.post(() -> {
                 if (heroIndex != want || heroItems.isEmpty()) return;
                 applyHeroInfo(it, logo, dir);

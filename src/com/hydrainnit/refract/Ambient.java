@@ -168,7 +168,7 @@ final class Ambient extends FrameLayout {
         int ink = minimalLight ? 0xFF111114 : Color.WHITE;
 
         // Weather: icon, temperature, condition (and place) in one group.
-        weatherGroup = new LinearLayout(getContext());
+        weatherGroup = group();
         weatherGroup.setOrientation(LinearLayout.HORIZONTAL);
         weatherGroup.setGravity(Gravity.CENTER_VERTICAL);
         weatherIcon = new ImageView(getContext());
@@ -193,7 +193,7 @@ final class Ambient extends FrameLayout {
         int infoGravity = Gravity.BOTTOM | (clockBottomLeft ? Gravity.END : Gravity.START);
 
         // Photo description and credit.
-        infoGroup = new LinearLayout(getContext());
+        infoGroup = group();
         infoGroup.setOrientation(LinearLayout.VERTICAL);
         infoGroup.setGravity(clockBottomLeft ? Gravity.END : Gravity.START);
         infoTitle = text(14, "medium", ink, 0.9f);
@@ -209,7 +209,7 @@ final class Ambient extends FrameLayout {
         infoGroup.setVisibility(GONE);
 
         // Movie: logo (or title), overview, rating and date, kept together.
-        movieGroup = new LinearLayout(getContext());
+        movieGroup = group();
         movieGroup.setOrientation(LinearLayout.VERTICAL);
         movieLogo = new ImageView(getContext());
         movieLogo.setAdjustViewBounds(true);
@@ -252,13 +252,28 @@ final class Ambient extends FrameLayout {
     }
 
     TextView text(float size, String weight, int color, float alpha) {
-        TextView t = new TextView(getContext());
+        // No offscreen layer for the alpha: a layer is cut to the view's bounds and would show the
+        // text shadow as a faint box around the words.
+        TextView t = new TextView(getContext()) {
+            @Override public boolean hasOverlappingRendering() {
+                return false;
+            }
+        };
         Ui.textSize(t, size);
         t.setTypeface(Ui.font(getContext(), weight));
         t.setTextColor(color);
         t.setAlpha(alpha);
         if (color == Color.WHITE) t.setShadowLayer(dp(5), 0, dp(1), 0x99000000);
         return t;
+    }
+
+    /** A row or column of labels that fades as one without an offscreen layer (see text()). */
+    LinearLayout group() {
+        return new LinearLayout(getContext()) {
+            @Override public boolean hasOverlappingRendering() {
+                return false;
+            }
+        };
     }
 
     static LayoutParams match() {
@@ -401,9 +416,9 @@ final class Ambient extends FrameLayout {
         Suggestions.Item it = movies.get(index);
         int gen = ++generation;
         io.execute(() -> {
-            Bitmap b = Suggestions.image(getContext(), it.backdrop, "w1280", Math.min(1280, screenW));
+            Bitmap b = Suggestions.image(getContext(), it.backdrop, "original", lowRam ? Math.min(1280, screenW) : screenW);
             String lp = Movies.configured(getContext()) ? Movies.logoFor(getContext(), it) : (it.logo == null ? "" : it.logo);
-            Bitmap logo = lp.isEmpty() ? null : Suggestions.image(getContext(), lp, "w500", 500);
+            Bitmap logo = lp.isEmpty() ? null : Suggestions.image(getContext(), lp, "original", 960);
             handler.post(() -> {
                 if (gen != generation || !running) return;
                 if (b != null) swap(b);

@@ -608,7 +608,7 @@ final class Suggestions {
 
     // ------------------------------------------------------------------ images
 
-    /** TMDB image, cached on disk, decoded no larger than maxWidth (the box has little RAM). */
+    /** TMDB image, cached on disk, decoded and scaled to no wider than maxWidth (the box has little RAM). */
     static Bitmap image(Context c, String path, String size, int maxWidth) {
         if (path == null || path.isEmpty()) return null;
         // Local artwork (Continue Watching) is an absolute file path; TMDB paths ("/abc.jpg") also
@@ -653,7 +653,15 @@ final class Suggestions {
             o.inSampleSize = 1;
             while (o.outWidth / (o.inSampleSize * 2) >= maxWidth) o.inSampleSize *= 2;
             o.inJustDecodeBounds = false;
-            return BitmapFactory.decodeFile(f.getPath(), o);
+            Bitmap b = BitmapFactory.decodeFile(f.getPath(), o);
+            // Full-resolution ("original") artwork: scale to the size it is shown at, so a 2560 px
+            // file is not kept at 2560 px when the screen is 1920 px wide.
+            if (b != null && b.getWidth() > maxWidth * 1.15f) {
+                Bitmap s = Bitmap.createScaledBitmap(b, maxWidth, Math.max(1, Math.round(b.getHeight() * maxWidth / (float) b.getWidth())), true);
+                if (s != b) b.recycle();
+                b = s;
+            }
+            return b;
         } catch (Exception e) {
             android.util.Log.w("TvHome", "image failed " + (path.startsWith("http") ? "" : size + path) + ": " + e);
             return null;

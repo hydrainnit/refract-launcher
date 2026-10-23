@@ -315,7 +315,7 @@ final class MoviesPanel {
         net.execute(() -> {
             if (closed || featured != it) return;
             String lp = Movies.logoFor(a, it);
-            Bitmap lb = lp.isEmpty() ? null : Suggestions.image(a, lp, "w500", a.dp(280));
+            Bitmap lb = lp.isEmpty() ? null : Suggestions.image(a, lp, "original", a.dp(280));
             a.handler.post(() -> {
                 if (closed || featured != it || lb == null) return;
                 logo.setImageBitmap(lb);
@@ -329,7 +329,7 @@ final class MoviesPanel {
         });
         img.execute(() -> {
             if (closed || featured != it) return;
-            Bitmap b = Suggestions.image(a, it.backdrop, "w1280", Math.min(1280, a.screenW));
+            Bitmap b = Suggestions.image(a, it.backdrop, "original", a.lowRam ? Math.min(1280, a.screenW) : a.screenW);
             a.handler.post(() -> {
                 if (closed || featured != it || b == null) return;
                 backdrop.setImageBitmap(b);  // the previous backdrop is dropped, not kept
