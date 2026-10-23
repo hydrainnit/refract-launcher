@@ -397,6 +397,7 @@ public class MainActivity extends Activity {
         handler.removeCallbacks(weatherTick);
         handler.post(weatherTick);
         fetchPhotos();
+        if (sessions == null) startNowPlaying();  // access granted while Home was open
     }
 
     /** One background download thread, so photo downloads never wait behind (or delay) decodes. */
@@ -453,6 +454,7 @@ public class MainActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         photoFetch.shutdownNow();
+        npIo.shutdownNow();
         if (pkgReceiver != null) unregisterReceiver(pkgReceiver);
         if (netCallback != null) {
             try {
@@ -4333,6 +4335,8 @@ public class MainActivity extends Activity {
     // ---------------------------------------------------------------- now playing
 
     android.media.session.MediaSessionManager sessions;
+    /** Its own thread: album art never waits behind movie artwork or photo decodes. */
+    final java.util.concurrent.ExecutorService npIo = java.util.concurrent.Executors.newSingleThreadExecutor();
     final List<android.media.session.MediaController> npWatched = new ArrayList<>();
     android.media.session.MediaController npController;
     String npKey;
@@ -4433,9 +4437,8 @@ public class MainActivity extends Activity {
         if (!key.equals(npKey)) {
             npKey = key;
             loadNowPlayingArt(pick.getPackageName(), md);
-        } else {
-            showNowPlaying(true);
         }
+        showNowPlaying(true);  // at once; the artwork follows when it is ready
         nowPlaying.setPlaying(on, Ambient.Settings.load(this).reduceMotion);
         String title = md == null ? null : md.getString(android.media.MediaMetadata.METADATA_KEY_TITLE);
         nowPlaying.setContentDescription(title == null ? "Now Playing" : "Now Playing: " + title);
@@ -4446,7 +4449,7 @@ public class MainActivity extends Activity {
         int gen = ++npArtGen;
         int size = Math.round(28 * unit);
         boolean lightPill = nowPlaying.light;
-        io.execute(() -> {
+        npIo.execute(() -> {
             Bitmap src = null;
             if (md != null) {
                 src = md.getBitmap(android.media.MediaMetadata.METADATA_KEY_ALBUM_ART);
