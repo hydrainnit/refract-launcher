@@ -611,7 +611,9 @@ final class Suggestions {
     /** TMDB image, cached on disk, decoded no larger than maxWidth (the box has little RAM). */
     static Bitmap image(Context c, String path, String size, int maxWidth) {
         if (path == null || path.isEmpty()) return null;
-        if (path.startsWith("/")) {  // local artwork (Continue Watching)
+        // Local artwork (Continue Watching) is an absolute file path; TMDB paths ("/abc.jpg") also
+        // start with a slash, so only a file that exists on disk takes this branch.
+        if (path.startsWith("/") && new File(path).isFile()) {
             BitmapFactory.Options o = new BitmapFactory.Options();
             o.inJustDecodeBounds = true;
             BitmapFactory.decodeFile(path, o);
@@ -630,7 +632,11 @@ final class Suggestions {
                 con.setConnectTimeout(8000);
                 con.setReadTimeout(15000);
                 try {
-                    if (con.getResponseCode() != 200) return null;
+                    int code = con.getResponseCode();
+                    if (code != 200) {
+                        android.util.Log.w("TvHome", "image " + code + " " + (abs ? "" : size + path));
+                        return null;
+                    }
                     byte[] data = readAll(con.getInputStream());
                     File tmp = new File(dir, f.getName() + ".part");
                     try (OutputStream os = new FileOutputStream(tmp)) {
@@ -649,6 +655,7 @@ final class Suggestions {
             o.inJustDecodeBounds = false;
             return BitmapFactory.decodeFile(f.getPath(), o);
         } catch (Exception e) {
+            android.util.Log.w("TvHome", "image failed " + (path.startsWith("http") ? "" : size + path) + ": " + e);
             return null;
         }
     }
