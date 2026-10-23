@@ -820,6 +820,12 @@ public class SettingsActivity extends Activity {
         return null;
     }
 
+    /** Downloads what the background and the screensaver need, in the background (nothing if on disk). */
+    void fetchPhotos() {
+        android.content.Context app = getApplicationContext();
+        new Thread(() -> Wallpapers.prefetch(app), "refract-photos").start();
+    }
+
     void refreshAll() {
         for (Runnable x : refreshers) x.run();
     }
@@ -855,7 +861,27 @@ public class SettingsActivity extends Activity {
 
     void pageBackground() {
         Wallpapers.Photo cur = Wallpapers.selected(this);
-        note("Shown behind your apps when you move down to them. Photos from Pexels, credited on screen and in Attributions.");
+        note("Shown behind your apps when you move down to them. Photos from Pexels, credited on screen and in Attributions. "
+                + "They download to the TV when first shown; without the internet, Refract's gradients appear instead. "
+                + "4K is sharper only on TVs that draw apps in 4K.");
+        row("Photo Quality", () -> Wallpapers.quality(this).equals("2160") ? "4K" : "1080p", () -> {
+            String[] keys = {"1080", "2160"};
+            String[] names = {"1080p  (about 0.4 MB a photo)", "4K  (about 1.5 MB a photo)"};
+            int sel = Wallpapers.quality(this).equals("2160") ? 1 : 0;
+            dialog("Photo quality").setSingleChoiceItems(names, sel, (d, w) -> {
+                if (!keys[w].equals(Wallpapers.quality(this))) {
+                    Wallpapers.setQuality(this, keys[w]);
+                    // Fetch the new quality now; the old files are removed as each one is replaced.
+                    fetchPhotos();
+                }
+                refreshAll();
+                d.dismiss();
+            }).show();
+        });
+        row("Downloaded", () -> {
+            long b = Wallpapers.bytesOnDisk(this);
+            return b == 0 ? "None yet" : String.format(java.util.Locale.US, "%.1f MB", b / 1048576f);
+        }, () -> { });
         for (Wallpapers.Category c : Wallpapers.categories(this)) {
             List<Wallpapers.Photo> in = Wallpapers.inCategory(this, c.id);
             if (in.isEmpty()) continue;
@@ -866,7 +892,10 @@ public class SettingsActivity extends Activity {
                     return now != null && now.id.equals(p.id) ? "\u2713" : (p.theme.equals("light") ? "Light" : "Dark");
                 }, () -> {
                     Wallpapers.select(this, p);
-                    Toast.makeText(this, "Background set \u00b7 " + p.credit(), Toast.LENGTH_SHORT).show();
+                    boolean ready = Wallpapers.downloaded(this, p) || Wallpapers.online(this);
+                    Toast.makeText(this, ready ? "Background set \u00b7 " + p.credit()
+                            : "Background set \u00b7 it downloads when the TV is online; a gradient shows until then", Toast.LENGTH_SHORT).show();
+                    fetchPhotos();
                 });
                 android.view.View.OnFocusChangeListener base = r.getOnFocusChangeListener();
                 r.setOnFocusChangeListener((v, has) -> {
@@ -1024,6 +1053,7 @@ public class SettingsActivity extends Activity {
             int i = Math.max(0, java.util.Arrays.asList(keys).indexOf(Ambient.prefs(this).getString(key, def)));
             dialog(label).setSingleChoiceItems(names, i, (d, w) -> {
                 Ambient.prefs(this).edit().putString(key, keys[w]).apply();
+                fetchPhotos();  // a photo screensaver gets its whole category on the TV
                 refreshAll();
                 d.dismiss();
             }).show();
@@ -1092,6 +1122,7 @@ public class SettingsActivity extends Activity {
             dialog("Photo category").setItems(names, (d, w) -> {
                 if (w == 0) Ambient.prefs(this).edit().putBoolean("follow", true).apply();
                 else Ambient.prefs(this).edit().putBoolean("follow", false).putString("category", cats.get(w - 1).id).apply();
+                fetchPhotos();  // a photo screensaver gets its whole category on the TV
                 refreshAll();
             }).show();
         });
@@ -1104,6 +1135,7 @@ public class SettingsActivity extends Activity {
             for (int i = 0; i < names.length; i++) names[i] = all.get(i).title;
             dialog("Single photo").setItems(names, (d, w) -> {
                 Ambient.prefs(this).edit().putString("single", all.get(w).id).apply();
+                fetchPhotos();  // a photo screensaver gets its whole category on the TV
                 refreshAll();
             }).show();
         });

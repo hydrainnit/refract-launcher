@@ -281,13 +281,24 @@ still dark in both modes.
 
 ## Backgrounds (Pexels photographs)
 
-18 photographs in 9 categories (Landscapes, Deserts, Oceans, Forests, Cities, Minimal, Abstract,
+53 photographs in 9 categories (Landscapes, Deserts, Oceans, Forests, Cities, Minimal, Abstract,
 Night, Cinematic), each tagged as suited to Light or Dark, replace the preset gradients. Existing
 profiles that chose a gradient keep it. The photo appears **only behind the app grid**: when focus
 moves from the dock row down into the grid, in the More Apps folder, or when the carousel is
 empty. The carousel above the dock is untouched. A legibility veil matching the appearance is baked
 into the photo once. Choose one in setup or under Settings → Home → Background, where moving
 through the list previews the photo. Every photo is credited on screen and in Attributions.
+
+- **Downloaded on the TV, not shipped in the app.** The APK carries only titles and credits; each
+  photo downloads from Pexels' image CDN (no key needed) the first time it is shown or previewed.
+  While online, Home also fetches the chosen background and its screensaver category ahead of
+  time, so they keep working offline.
+- **Photo Quality** (Settings → Background): **1080p** (default, about 0.4 MB a photo) or **4K**
+  (about 1.5 MB). 4K is only sharper on TVs that draw apps in 4K; most Android TVs draw apps at
+  1080p and scale up. Low-RAM TVs always decode at 1080p. Switching downloads the new quality and
+  removes the old copies as they are replaced. The page shows how much space photos use.
+- **No internet and not downloaded yet:** Home shows Refract's gradient field and the screensaver
+  shows gradients (without a photo credit) until the photo can be fetched.
 
 ## Movies tab and Movies Home Theme
 

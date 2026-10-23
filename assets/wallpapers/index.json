@@ -1,88 +1,573 @@
 {
-  "license": "Pexels License (https://www.pexels.com/license/): free to use and modify, attribution not required. Bundled resized and re-encoded as built-in launcher backgrounds only; not offered for download or redistribution.",
-  "categories": [
-    {"id": "landscapes", "name": "Landscapes"},
-    {"id": "deserts", "name": "Deserts"},
-    {"id": "oceans", "name": "Oceans"},
-    {"id": "forests", "name": "Forests"},
-    {"id": "cities", "name": "Cities"},
-    {"id": "minimal", "name": "Minimal"},
-    {"id": "abstract", "name": "Abstract"},
-    {"id": "night", "name": "Night Sky"},
-    {"id": "cinematic", "name": "Cinematic"}
-  ],
-  "photos": [
-    {"id": "pexels-39428517", "file": "39428517.webp", "category": "landscapes", "theme": "light",
-     "title": "Canadian Rockies over a turquoise alpine lake", "photographer": "Sophia Zheng",
-     "photographer_url": "https://www.pexels.com/@sophia-zheng-39372959/",
-     "source_url": "https://www.pexels.com/photo/stunning-view-of-the-canadian-rockies-and-turquoise-lake-39428517/"},
-    {"id": "pexels-6727906", "file": "6727906.webp", "category": "landscapes", "theme": "light",
-     "title": "Snow-capped mountains reflected in a still lake", "photographer": "Magic K",
-     "photographer_url": "https://www.pexels.com/@magic-k-24827758/",
-     "source_url": "https://www.pexels.com/photo/snow-capped-mountain-near-the-lake-6727906/"},
-    {"id": "pexels-31834071", "file": "31834071.webp", "category": "deserts", "theme": "light",
-     "title": "Sand dunes below distant mountains, Death Valley", "photographer": "Phil Evenden",
-     "photographer_url": "https://www.pexels.com/@philevenphotos/",
-     "source_url": "https://www.pexels.com/photo/stunning-sand-dunes-in-death-valley-national-park-31834071/"},
-    {"id": "pexels-7271881", "file": "7271881.webp", "category": "deserts", "theme": "dark",
-     "title": "Smooth dunes under a twilight sky", "photographer": "Mo Eid",
-     "photographer_url": "https://www.pexels.com/@mo-eid-1268975/",
-     "source_url": "https://www.pexels.com/photo/landscape-of-smooth-sandy-hills-at-dawn-7271881/"},
-    {"id": "pexels-7981723", "file": "7981723.webp", "category": "oceans", "theme": "light",
-     "title": "Turquoise lagoon from above", "photographer": "Marc Coenen",
-     "photographer_url": "https://www.pexels.com/@marc-coenen-298185/",
-     "source_url": "https://www.pexels.com/photo/beautiful-turquoise-lagoon-7981723/"},
-    {"id": "pexels-319912", "file": "319912.webp", "category": "oceans", "theme": "dark",
-     "title": "Golden hour over the waves", "photographer": "Atlantic Ambience",
-     "photographer_url": "https://www.pexels.com/@freestockpro/",
-     "source_url": "https://www.pexels.com/photo/body-of-water-during-golden-hour-319912/"},
-    {"id": "pexels-10762369", "file": "10762369.webp", "category": "forests", "theme": "light",
-     "title": "Misty pine forest on a mountainside", "photographer": "Ali Kazal",
-     "photographer_url": "https://www.pexels.com/@lureofadventure/",
-     "source_url": "https://www.pexels.com/photo/green-pine-trees-on-mountain-area-10762369/"},
-    {"id": "pexels-9984778", "file": "9984778.webp", "category": "forests", "theme": "dark",
-     "title": "Tall trees in a hazy forest at dawn", "photographer": "Beepin4",
-     "photographer_url": "https://www.pexels.com/@beepin4-87267358/",
-     "source_url": "https://www.pexels.com/photo/trees-in-the-forest-9984778/"},
-    {"id": "pexels-5414582", "file": "5414582.webp", "category": "cities", "theme": "dark",
-     "title": "Mumbai skyline reflected at night", "photographer": "Vijit Bagh",
-     "photographer_url": "https://www.pexels.com/@vijit-bagh-3435480/",
-     "source_url": "https://www.pexels.com/photo/a-city-buildings-with-lights-at-night-5414582/"},
-    {"id": "pexels-462267", "file": "462267.webp", "category": "cities", "theme": "dark",
-     "title": "Manhattan from the Brooklyn Bridge at night", "photographer": "Pixabay",
-     "photographer_url": "https://www.pexels.com/@pixabay/",
-     "source_url": "https://www.pexels.com/photo/red-metal-bridge-462267/"},
-    {"id": "pexels-20177884", "file": "20177884.webp", "category": "minimal", "theme": "light",
-     "title": "A lone tree by a calm blue sea", "photographer": "İrem Kızılarslan",
-     "photographer_url": "https://www.pexels.com/@i-rem-kizilarslan-986908552/",
-     "source_url": "https://www.pexels.com/photo/view-of-a-single-leafless-tree-on-the-background-of-a-blue-body-of-water-20177884/"},
-    {"id": "pexels-12699625", "file": "12699625.webp", "category": "minimal", "theme": "dark",
-     "title": "Hill silhouette against the daybreak glow", "photographer": "Dominik Perau",
-     "photographer_url": "https://www.pexels.com/@dominik-perau-263453691/",
-     "source_url": "https://www.pexels.com/photo/silhouette-of-hill-during-daybreak-12699625/"},
-    {"id": "pexels-7135007", "file": "7135007.webp", "category": "abstract", "theme": "light",
-     "title": "Soft pastel gradient", "photographer": "Codioful (formerly Gradienta)",
-     "photographer_url": "https://www.pexels.com/@codioful/",
-     "source_url": "https://www.pexels.com/photo/bright-colors-gradient-wallpaper-7135007/"},
-    {"id": "pexels-6984991", "file": "6984991.webp", "category": "abstract", "theme": "dark",
-     "title": "Vivid violet and amber gradient", "photographer": "Codioful (formerly Gradienta)",
-     "photographer_url": "https://www.pexels.com/@codioful/",
-     "source_url": "https://www.pexels.com/photo/colorful-gradient-6984991/"},
-    {"id": "pexels-3083808", "file": "3083808.webp", "category": "night", "theme": "dark",
-     "title": "The Milky Way on a clear night", "photographer": "S S",
-     "photographer_url": "https://www.pexels.com/@soucam/",
-     "source_url": "https://www.pexels.com/photo/milky-way-3083808/"},
-    {"id": "pexels-31021507", "file": "31021507.webp", "category": "night", "theme": "dark",
-     "title": "Starry sky over the desert at Jaisalmer", "photographer": "Aarin Husain",
-     "photographer_url": "https://www.pexels.com/@aarin/",
-     "source_url": "https://www.pexels.com/photo/starry-night-in-jaisalmer-s-desert-sky-31021507/"},
-    {"id": "pexels-34657697", "file": "34657697.webp", "category": "cinematic", "theme": "dark",
-     "title": "A foggy road through the forest at blue hour", "photographer": "Septimiu Lupea",
-     "photographer_url": "https://www.pexels.com/@septimiu-lupea-271955805/",
-     "source_url": "https://www.pexels.com/photo/foggy-road-in-a-misty-forest-during-blue-hour-34657697/"},
-    {"id": "pexels-28641608", "file": "28641608.webp", "category": "cinematic", "theme": "light",
-     "title": "Forested hills rising out of morning fog", "photographer": "Sergio Zhukov",
-     "photographer_url": "https://www.pexels.com/@triemli/",
-     "source_url": "https://www.pexels.com/photo/foggy-forested-hills-in-morning-light-28641608/"}
-  ]
+ "license": "Pexels License (https://www.pexels.com/license/): free to use and modify, attribution not required. Only this metadata ships in the app; each TV downloads the pictures from images.pexels.com for use as launcher backgrounds. Not offered for download or redistribution.",
+ "categories": [
+  {
+   "id": "landscapes",
+   "name": "Landscapes"
+  },
+  {
+   "id": "deserts",
+   "name": "Deserts"
+  },
+  {
+   "id": "oceans",
+   "name": "Oceans"
+  },
+  {
+   "id": "forests",
+   "name": "Forests"
+  },
+  {
+   "id": "cities",
+   "name": "Cities"
+  },
+  {
+   "id": "minimal",
+   "name": "Minimal"
+  },
+  {
+   "id": "abstract",
+   "name": "Abstract"
+  },
+  {
+   "id": "night",
+   "name": "Night Sky"
+  },
+  {
+   "id": "cinematic",
+   "name": "Cinematic"
+  }
+ ],
+ "photos": [
+  {
+   "id": "pexels-39428517",
+   "file": "39428517.webp",
+   "category": "landscapes",
+   "theme": "light",
+   "title": "Canadian Rockies over a turquoise alpine lake",
+   "photographer": "Sophia Zheng",
+   "photographer_url": "https://www.pexels.com/@sophia-zheng-39372959/",
+   "source_url": "https://www.pexels.com/photo/stunning-view-of-the-canadian-rockies-and-turquoise-lake-39428517/"
+  },
+  {
+   "id": "pexels-6727906",
+   "file": "6727906.webp",
+   "category": "landscapes",
+   "theme": "light",
+   "title": "Snow-capped mountains reflected in a still lake",
+   "photographer": "Magic K",
+   "photographer_url": "https://www.pexels.com/@magic-k-24827758/",
+   "source_url": "https://www.pexels.com/photo/snow-capped-mountain-near-the-lake-6727906/"
+  },
+  {
+   "id": "pexels-36103492",
+   "file": "36103492.webp",
+   "category": "landscapes",
+   "theme": "light",
+   "title": "Scenic Mountain Lake with Clear Reflections",
+   "photographer": "gang liang",
+   "photographer_url": "https://www.pexels.com/@gang-liang-2159128498/",
+   "source_url": "https://www.pexels.com/photo/scenic-mountain-lake-with-clear-reflections-36103492/"
+  },
+  {
+   "id": "pexels-40090812",
+   "file": "40090812.webp",
+   "category": "landscapes",
+   "theme": "dark",
+   "title": "Sailing on Walensee Lake with Alpine Background",
+   "photographer": "Paolo Bici",
+   "photographer_url": "https://www.pexels.com/@paolobici/",
+   "source_url": "https://www.pexels.com/photo/sailing-on-walensee-lake-with-alpine-background-40090812/"
+  },
+  {
+   "id": "pexels-40133180",
+   "file": "40133180.webp",
+   "category": "landscapes",
+   "theme": "light",
+   "title": "Stunning View of Swiss Alps at Sunset",
+   "photographer": "Paolo Bici",
+   "photographer_url": "https://www.pexels.com/@paolobici/",
+   "source_url": "https://www.pexels.com/photo/stunning-view-of-swiss-alps-at-sunset-40133180/"
+  },
+  {
+   "id": "pexels-39859805",
+   "file": "39859805.webp",
+   "category": "landscapes",
+   "theme": "dark",
+   "title": "Scenic View of Kolsai Lake in Almaty, Kazakhstan",
+   "photographer": "Necip Duman",
+   "photographer_url": "https://www.pexels.com/@necip-duman-3299706/",
+   "source_url": "https://www.pexels.com/photo/scenic-view-of-kolsai-lake-in-almaty-kazakhstan-39859805/"
+  },
+  {
+   "id": "pexels-31834071",
+   "file": "31834071.webp",
+   "category": "deserts",
+   "theme": "light",
+   "title": "Sand dunes below distant mountains, Death Valley",
+   "photographer": "Phil Evenden",
+   "photographer_url": "https://www.pexels.com/@philevenphotos/",
+   "source_url": "https://www.pexels.com/photo/stunning-sand-dunes-in-death-valley-national-park-31834071/"
+  },
+  {
+   "id": "pexels-7271881",
+   "file": "7271881.webp",
+   "category": "deserts",
+   "theme": "dark",
+   "title": "Smooth dunes under a twilight sky",
+   "photographer": "Mo Eid",
+   "photographer_url": "https://www.pexels.com/@mo-eid-1268975/",
+   "source_url": "https://www.pexels.com/photo/landscape-of-smooth-sandy-hills-at-dawn-7271881/"
+  },
+  {
+   "id": "pexels-8869381",
+   "file": "8869381.webp",
+   "category": "deserts",
+   "theme": "light",
+   "title": "Sand Dunes in a Desert",
+   "photographer": "MART PRODUCTION",
+   "photographer_url": "https://www.pexels.com/@mart-production/",
+   "source_url": "https://www.pexels.com/photo/photo-of-sand-dunes-in-a-desert-8869381/"
+  },
+  {
+   "id": "pexels-28638835",
+   "file": "28638835.webp",
+   "category": "deserts",
+   "theme": "dark",
+   "title": "Majestic Sand Dunes in Golden Evening Light",
+   "photographer": "Stephen Leonardi",
+   "photographer_url": "https://www.pexels.com/@stephen-leonardi-587681991/",
+   "source_url": "https://www.pexels.com/photo/majestic-sand-dunes-in-golden-evening-light-28638835/"
+  },
+  {
+   "id": "pexels-34565944",
+   "file": "34565944.webp",
+   "category": "deserts",
+   "theme": "light",
+   "title": "Serene Desert Dunes with Footprints and Driftwood",
+   "photographer": "Dirk Pothen",
+   "photographer_url": "https://www.pexels.com/@dirk-pothen-2149332904/",
+   "source_url": "https://www.pexels.com/photo/serene-desert-dunes-with-footprints-and-driftwood-34565944/"
+  },
+  {
+   "id": "pexels-30682253",
+   "file": "30682253.webp",
+   "category": "deserts",
+   "theme": "light",
+   "title": "Serene Expanses of Endless Sand Dunes",
+   "photographer": "Dirk Pothen",
+   "photographer_url": "https://www.pexels.com/@dirk-pothen-2149332904/",
+   "source_url": "https://www.pexels.com/photo/serene-expanses-of-endless-sand-dunes-30682253/"
+  },
+  {
+   "id": "pexels-7981723",
+   "file": "7981723.webp",
+   "category": "oceans",
+   "theme": "light",
+   "title": "Turquoise lagoon from above",
+   "photographer": "Marc Coenen",
+   "photographer_url": "https://www.pexels.com/@marc-coenen-298185/",
+   "source_url": "https://www.pexels.com/photo/beautiful-turquoise-lagoon-7981723/"
+  },
+  {
+   "id": "pexels-319912",
+   "file": "319912.webp",
+   "category": "oceans",
+   "theme": "dark",
+   "title": "Golden hour over the waves",
+   "photographer": "Atlantic Ambience",
+   "photographer_url": "https://www.pexels.com/@freestockpro/",
+   "source_url": "https://www.pexels.com/photo/body-of-water-during-golden-hour-319912/"
+  },
+  {
+   "id": "pexels-7762128",
+   "file": "7762128.webp",
+   "category": "oceans",
+   "theme": "light",
+   "title": "Big Waves on Sea",
+   "photographer": "Magda Ehlers",
+   "photographer_url": "https://www.pexels.com/@magda-ehlers-pexels/",
+   "source_url": "https://www.pexels.com/photo/big-waves-on-sea-7762128/"
+  },
+  {
+   "id": "pexels-39802930",
+   "file": "39802930.webp",
+   "category": "oceans",
+   "theme": "dark",
+   "title": "Vibrant Ocean Waves with Turquoise Patterns",
+   "photographer": "Kimmo Vainio",
+   "photographer_url": "https://www.pexels.com/@kimmo-vainio-314143536/",
+   "source_url": "https://www.pexels.com/photo/vibrant-ocean-waves-with-turquoise-patterns-39802930/"
+  },
+  {
+   "id": "pexels-7502481",
+   "file": "7502481.webp",
+   "category": "oceans",
+   "theme": "light",
+   "title": "Blue and White Sea Foam",
+   "photographer": "Jess Loiterton",
+   "photographer_url": "https://www.pexels.com/@jess-vide/",
+   "source_url": "https://www.pexels.com/photo/blue-and-white-sea-foam-7502481/"
+  },
+  {
+   "id": "pexels-17512580",
+   "file": "17512580.webp",
+   "category": "oceans",
+   "theme": "dark",
+   "title": "Water Foam on Coast",
+   "photographer": "Shreyaan Vashishtha",
+   "photographer_url": "https://www.pexels.com/@shreyaan/",
+   "source_url": "https://www.pexels.com/photo/water-foam-on-coast-17512580/"
+  },
+  {
+   "id": "pexels-10762369",
+   "file": "10762369.webp",
+   "category": "forests",
+   "theme": "light",
+   "title": "Misty pine forest on a mountainside",
+   "photographer": "Ali Kazal",
+   "photographer_url": "https://www.pexels.com/@lureofadventure/",
+   "source_url": "https://www.pexels.com/photo/green-pine-trees-on-mountain-area-10762369/"
+  },
+  {
+   "id": "pexels-9984778",
+   "file": "9984778.webp",
+   "category": "forests",
+   "theme": "dark",
+   "title": "Tall trees in a hazy forest at dawn",
+   "photographer": "Beepin4",
+   "photographer_url": "https://www.pexels.com/@beepin4-87267358/",
+   "source_url": "https://www.pexels.com/photo/trees-in-the-forest-9984778/"
+  },
+  {
+   "id": "pexels-15222306",
+   "file": "15222306.webp",
+   "category": "forests",
+   "theme": "light",
+   "title": "Foggy Forest in Autumn",
+   "photographer": "Martin G",
+   "photographer_url": "https://www.pexels.com/@martin-g-427039241/",
+   "source_url": "https://www.pexels.com/photo/foggy-forest-in-autumn-15222306/"
+  },
+  {
+   "id": "pexels-28436769",
+   "file": "28436769.webp",
+   "category": "forests",
+   "theme": "dark",
+   "title": "Serene Misty Mountain Landscape",
+   "photographer": "Zaur Takhgiriev",
+   "photographer_url": "https://www.pexels.com/@zkadoshi/",
+   "source_url": "https://www.pexels.com/photo/serene-misty-mountain-landscape-photography-28436769/"
+  },
+  {
+   "id": "pexels-36671230",
+   "file": "36671230.webp",
+   "category": "forests",
+   "theme": "dark",
+   "title": "Misty Forest with Bare Trees in Fog",
+   "photographer": "Fidan Nazim qizi",
+   "photographer_url": "https://www.pexels.com/@fidan-nazim-qizi-134456769/",
+   "source_url": "https://www.pexels.com/photo/misty-forest-with-bare-trees-in-fog-36671230/"
+  },
+  {
+   "id": "pexels-31612225",
+   "file": "31612225.webp",
+   "category": "forests",
+   "theme": "dark",
+   "title": "Misty Forest Canopy with Dense Fog in Morning",
+   "photographer": "eberhard grossgasteiger",
+   "photographer_url": "https://www.pexels.com/@eberhardgross/",
+   "source_url": "https://www.pexels.com/photo/misty-forest-canopy-with-dense-fog-in-morning-31612225/"
+  },
+  {
+   "id": "pexels-5414582",
+   "file": "5414582.webp",
+   "category": "cities",
+   "theme": "dark",
+   "title": "Mumbai skyline reflected at night",
+   "photographer": "Vijit Bagh",
+   "photographer_url": "https://www.pexels.com/@vijit-bagh-3435480/",
+   "source_url": "https://www.pexels.com/photo/a-city-buildings-with-lights-at-night-5414582/"
+  },
+  {
+   "id": "pexels-462267",
+   "file": "462267.webp",
+   "category": "cities",
+   "theme": "dark",
+   "title": "Manhattan from the Brooklyn Bridge at night",
+   "photographer": "Pixabay",
+   "photographer_url": "https://www.pexels.com/@pixabay/",
+   "source_url": "https://www.pexels.com/photo/red-metal-bridge-462267/"
+  },
+  {
+   "id": "pexels-20185085",
+   "file": "20185085.webp",
+   "category": "cities",
+   "theme": "dark",
+   "title": "Skyscrapers by River in Austin at Night",
+   "photographer": "Elsie Soto",
+   "photographer_url": "https://www.pexels.com/@elsiebsoto/",
+   "source_url": "https://www.pexels.com/photo/skyscrapers-by-river-in-austin-at-night-20185085/"
+  },
+  {
+   "id": "pexels-18441167",
+   "file": "18441167.webp",
+   "category": "cities",
+   "theme": "dark",
+   "title": "Illuminated Skyscrapers and Roads in Night City",
+   "photographer": "Erik Mclean",
+   "photographer_url": "https://www.pexels.com/@introspectivedsgn/",
+   "source_url": "https://www.pexels.com/photo/illuminated-skyscrapers-and-roads-in-night-city-18441167/"
+  },
+  {
+   "id": "pexels-14936005",
+   "file": "14936005.webp",
+   "category": "cities",
+   "theme": "dark",
+   "title": "20 Fenchurch Street and the Tower of London at Night",
+   "photographer": "Manzoni Studios",
+   "photographer_url": "https://www.pexels.com/@manzoni-studios-59597719/",
+   "source_url": "https://www.pexels.com/photo/20-fenchurch-street-skyscraper-and-tower-of-london-at-night-14936005/"
+  },
+  {
+   "id": "pexels-40323235",
+   "file": "40323235.webp",
+   "category": "cities",
+   "theme": "dark",
+   "title": "Vibrant Night Cityscape with Neon Lights",
+   "photographer": "Indigo",
+   "photographer_url": "https://www.pexels.com/@indigo-2150492122/",
+   "source_url": "https://www.pexels.com/photo/vibrant-night-cityscape-with-neon-lights-40323235/"
+  },
+  {
+   "id": "pexels-20177884",
+   "file": "20177884.webp",
+   "category": "minimal",
+   "theme": "light",
+   "title": "A lone tree by a calm blue sea",
+   "photographer": "İrem Kızılarslan",
+   "photographer_url": "https://www.pexels.com/@i-rem-kizilarslan-986908552/",
+   "source_url": "https://www.pexels.com/photo/view-of-a-single-leafless-tree-on-the-background-of-a-blue-body-of-water-20177884/"
+  },
+  {
+   "id": "pexels-12699625",
+   "file": "12699625.webp",
+   "category": "minimal",
+   "theme": "dark",
+   "title": "Hill silhouette against the daybreak glow",
+   "photographer": "Dominik Perau",
+   "photographer_url": "https://www.pexels.com/@dominik-perau-263453691/",
+   "source_url": "https://www.pexels.com/photo/silhouette-of-hill-during-daybreak-12699625/"
+  },
+  {
+   "id": "pexels-30024958",
+   "file": "30024958.webp",
+   "category": "minimal",
+   "theme": "light",
+   "title": "Isolated Tree on Golden Hill in Open Landscape",
+   "photographer": "Shovan Datta",
+   "photographer_url": "https://www.pexels.com/@shovan-datta-3275479/",
+   "source_url": "https://www.pexels.com/photo/isolated-tree-on-golden-hill-in-open-landscape-30024958/"
+  },
+  {
+   "id": "pexels-28821659",
+   "file": "28821659.webp",
+   "category": "minimal",
+   "theme": "dark",
+   "title": "Tranquil Lakeside View at Dusk",
+   "photographer": "Sergio Zhukov",
+   "photographer_url": "https://www.pexels.com/@triemli/",
+   "source_url": "https://www.pexels.com/photo/tranquil-lakeside-view-at-dusk-28821659/"
+  },
+  {
+   "id": "pexels-28824144",
+   "file": "28824144.webp",
+   "category": "minimal",
+   "theme": "dark",
+   "title": "Tranquil Ocean Scene with Overcast Sky",
+   "photographer": "Francesco Ungaro",
+   "photographer_url": "https://www.pexels.com/@francesco-ungaro/",
+   "source_url": "https://www.pexels.com/photo/tranquil-ocean-scene-with-overcast-sky-28824144/"
+  },
+  {
+   "id": "pexels-7135007",
+   "file": "7135007.webp",
+   "category": "abstract",
+   "theme": "light",
+   "title": "Soft pastel gradient",
+   "photographer": "Codioful (formerly Gradienta)",
+   "photographer_url": "https://www.pexels.com/@codioful/",
+   "source_url": "https://www.pexels.com/photo/bright-colors-gradient-wallpaper-7135007/"
+  },
+  {
+   "id": "pexels-6984991",
+   "file": "6984991.webp",
+   "category": "abstract",
+   "theme": "dark",
+   "title": "Vivid violet and amber gradient",
+   "photographer": "Codioful (formerly Gradienta)",
+   "photographer_url": "https://www.pexels.com/@codioful/",
+   "source_url": "https://www.pexels.com/photo/colorful-gradient-6984991/"
+  },
+  {
+   "id": "pexels-7135053",
+   "file": "7135053.webp",
+   "category": "abstract",
+   "theme": "light",
+   "title": "A Pastel Color Gradient",
+   "photographer": "Codioful (formerly Gradienta)",
+   "photographer_url": "https://www.pexels.com/@codioful/",
+   "source_url": "https://www.pexels.com/photo/a-pastel-color-gradient-7135053/"
+  },
+  {
+   "id": "pexels-7135006",
+   "file": "7135006.webp",
+   "category": "abstract",
+   "theme": "light",
+   "title": "Multi Color Gradient Wallpaper",
+   "photographer": "Codioful (formerly Gradienta)",
+   "photographer_url": "https://www.pexels.com/@codioful/",
+   "source_url": "https://www.pexels.com/photo/multi-color-gradient-wallpaper-7135006/"
+  },
+  {
+   "id": "pexels-7130560",
+   "file": "7130560.webp",
+   "category": "abstract",
+   "theme": "light",
+   "title": "Pink Gradient Background",
+   "photographer": "Codioful (formerly Gradienta)",
+   "photographer_url": "https://www.pexels.com/@codioful/",
+   "source_url": "https://www.pexels.com/photo/pink-gradient-background-7130560/"
+  },
+  {
+   "id": "pexels-7135027",
+   "file": "7135027.webp",
+   "category": "abstract",
+   "theme": "dark",
+   "title": "Bright HD Colors",
+   "photographer": "Codioful (formerly Gradienta)",
+   "photographer_url": "https://www.pexels.com/@codioful/",
+   "source_url": "https://www.pexels.com/photo/an-illustration-of-bright-hd-colors-7135027/"
+  },
+  {
+   "id": "pexels-3083808",
+   "file": "3083808.webp",
+   "category": "night",
+   "theme": "dark",
+   "title": "The Milky Way on a clear night",
+   "photographer": "S S",
+   "photographer_url": "https://www.pexels.com/@soucam/",
+   "source_url": "https://www.pexels.com/photo/milky-way-3083808/"
+  },
+  {
+   "id": "pexels-31021507",
+   "file": "31021507.webp",
+   "category": "night",
+   "theme": "dark",
+   "title": "Starry sky over the desert at Jaisalmer",
+   "photographer": "Aarin Husain",
+   "photographer_url": "https://www.pexels.com/@aarin/",
+   "source_url": "https://www.pexels.com/photo/starry-night-in-jaisalmer-s-desert-sky-31021507/"
+  },
+  {
+   "id": "pexels-18358576",
+   "file": "18358576.webp",
+   "category": "night",
+   "theme": "dark",
+   "title": "The Starry Night Sky",
+   "photographer": "Jozef Papp",
+   "photographer_url": "https://www.pexels.com/@jozef-papp-2504818/",
+   "source_url": "https://www.pexels.com/photo/photo-of-the-starry-night-sky-18358576/"
+  },
+  {
+   "id": "pexels-11858855",
+   "file": "11858855.webp",
+   "category": "night",
+   "theme": "dark",
+   "title": "Stars in the Sky during Night Time",
+   "photographer": "Koma Tang",
+   "photographer_url": "https://www.pexels.com/@koma-tang-10472205/",
+   "source_url": "https://www.pexels.com/photo/stars-in-the-sky-during-night-time-11858855/"
+  },
+  {
+   "id": "pexels-17967650",
+   "file": "17967650.webp",
+   "category": "night",
+   "theme": "dark",
+   "title": "The Milky Way over a Quiet Landscape",
+   "photographer": "Gammel Knecht",
+   "photographer_url": "https://www.pexels.com/@gammel/",
+   "source_url": "https://www.pexels.com/photo/galaxis-erlebnisse-magische-milchstrassenszenen-17967650/"
+  },
+  {
+   "id": "pexels-39018962",
+   "file": "39018962.webp",
+   "category": "night",
+   "theme": "dark",
+   "title": "Breathtaking Starry Night Sky with Milky Way",
+   "photographer": "Viliam Kudelka",
+   "photographer_url": "https://www.pexels.com/@viliamphotography/",
+   "source_url": "https://www.pexels.com/photo/breathtaking-starry-night-sky-with-milky-way-39018962/"
+  },
+  {
+   "id": "pexels-34657697",
+   "file": "34657697.webp",
+   "category": "cinematic",
+   "theme": "dark",
+   "title": "A foggy road through the forest at blue hour",
+   "photographer": "Septimiu Lupea",
+   "photographer_url": "https://www.pexels.com/@septimiu-lupea-271955805/",
+   "source_url": "https://www.pexels.com/photo/foggy-road-in-a-misty-forest-during-blue-hour-34657697/"
+  },
+  {
+   "id": "pexels-28641608",
+   "file": "28641608.webp",
+   "category": "cinematic",
+   "theme": "light",
+   "title": "Forested hills rising out of morning fog",
+   "photographer": "Sergio Zhukov",
+   "photographer_url": "https://www.pexels.com/@triemli/",
+   "source_url": "https://www.pexels.com/photo/foggy-forested-hills-in-morning-light-28641608/"
+  },
+  {
+   "id": "pexels-9808579",
+   "file": "9808579.webp",
+   "category": "cinematic",
+   "theme": "light",
+   "title": "An Empty Road in the Fog",
+   "photographer": "Plato Terentev",
+   "photographer_url": "https://www.pexels.com/@plato-terentev-3804555/",
+   "source_url": "https://www.pexels.com/photo/photo-of-an-empty-road-with-fog-9808579/"
+  },
+  {
+   "id": "pexels-10097388",
+   "file": "10097388.webp",
+   "category": "cinematic",
+   "theme": "dark",
+   "title": "Dirt Road with Fallen Leaves in Grayscale",
+   "photographer": "Fariborz MP",
+   "photographer_url": "https://www.pexels.com/@fariborzart/",
+   "source_url": "https://www.pexels.com/photo/grayscale-photo-of-dirt-road-with-fallen-leaves-10097388/"
+  },
+  {
+   "id": "pexels-1094545",
+   "file": "1094545.webp",
+   "category": "cinematic",
+   "theme": "dark",
+   "title": "Asphalt Road Between Tall Trees",
+   "photographer": "Chanita Sykes",
+   "photographer_url": "https://www.pexels.com/@chanita-sykes-417447/",
+   "source_url": "https://www.pexels.com/photo/asphalt-road-between-tall-trees-1094545/"
+  },
+  {
+   "id": "pexels-9808688",
+   "file": "9808688.webp",
+   "category": "cinematic",
+   "theme": "light",
+   "title": "Road and Forest in Dense Fog",
+   "photographer": "Plato Terentev",
+   "photographer_url": "https://www.pexels.com/@plato-terentev-3804555/",
+   "source_url": "https://www.pexels.com/photo/road-and-forest-in-dense-fog-9808688/"
+  }
+ ]
 }

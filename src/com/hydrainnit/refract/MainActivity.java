@@ -396,6 +396,27 @@ public class MainActivity extends Activity {
         }
         handler.removeCallbacks(weatherTick);
         handler.post(weatherTick);
+        fetchPhotos();
+    }
+
+    /** One background download thread, so photo downloads never wait behind (or delay) decodes. */
+    final java.util.concurrent.ExecutorService photoFetch = java.util.concurrent.Executors.newSingleThreadExecutor();
+    boolean fetchQueued;
+
+    /**
+     * Downloads the background and its screensaver category while online (nothing when they are
+     * already on disk), then shows the photo if Home was showing the gradient in its place.
+     */
+    void fetchPhotos() {
+        if (fetchQueued) return;
+        fetchQueued = true;
+        photoFetch.execute(() -> {
+            Wallpapers.prefetch(this);
+            handler.post(() -> {
+                fetchQueued = false;
+                if (photoWanted && gridPhoto == null && !photoLoading) showGridPhoto();
+            });
+        });
     }
 
     /** Home is out of sight (an app is open): the grid photo is decoded again when it is next needed. */
@@ -431,6 +452,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        photoFetch.shutdownNow();
         if (pkgReceiver != null) unregisterReceiver(pkgReceiver);
         if (netCallback != null) {
             try {
@@ -910,7 +932,8 @@ public class MainActivity extends Activity {
         Wallpapers.Photo p = Wallpapers.byId(this, style.substring(Wallpapers.PHOTO.length()));
         if (p == null) return;
         int gen = ++photoGen;
-        int maxW = Math.min(1920, screenW);  // the bundled photos are 1920x1080: full detail on a 1080p UI
+        // Full detail at the screen's width; low-RAM TVs cap at 1080p even when 4K photos are chosen.
+        int maxW = lowRam ? Math.min(1920, screenW) : screenW;
         photoLoading = true;
         io.execute(() -> {
             Bitmap b = Wallpapers.decode(this, p, maxW);
@@ -3835,6 +3858,7 @@ public class MainActivity extends Activity {
         netIcon.setContentDescription(state == 2 ? "Online" : state == 1 ? "No internet" : "Offline");
         // Back online: refresh what needs the internet.
         if (state == 2) AirPlayGuard.check(this, back);
+        if (state == 2 && back) fetchPhotos();
         if (state == 2 && back) {
             Weather.refresh(this, true, this::updateWeather);
             loadHero();

@@ -7,7 +7,7 @@ A tvOS 26–style home screen for Android TV, **made by Hydrainnit**. It is a fo
 builds on (see [Attributions](ATTRIBUTIONS.md)). It replaces the stock launcher with one modelled on
 Apple TV: glass dock, full-screen carousel, Control Center and profiles. It is built to stay smooth
 on low-end TV boxes like the Xiaomi Mi Box. Plain Java, no Gradle, no third-party runtime
-libraries. The APK is about 6 MB, 4.6 MB of which is bundled 1920×1080 photographs.
+libraries. The APK is about 1.3 MB: background photos download to the TV at 1080p or 4K, with gradients when offline.
 
 Application ID: `com.hydrainnit.refract`.
 
@@ -36,8 +36,8 @@ their studios and are fetched at runtime, not shipped in the app.
 - **Appearance**: Light (frosted white glass, dark text) or Dark (smoked glass), chosen in setup
   with live previews and followed by every screen.
 - **Home**: Liquid Glass dock, 6-across app grid in Apple's measured proportions, focus lift and
-  zoom-to-open, More Apps folder, 18 bundled Pexels photographs in 9 categories shown behind the
-  grid.
+  zoom-to-open, More Apps folder, 53 Pexels photographs in 9 categories shown behind the grid,
+  downloaded to the TV at 1080p or 4K (gradients when offline).
 - **Movies**: a Movies tab (Trending, Popular, Top Rated, Coming Soon, genres) and an optional
   **Movies Home Theme** with full-screen TMDB backdrops, title logos, rating, release date and
   overview. Both need your own free TMDB key.
@@ -111,10 +111,7 @@ under Settings → About → Attributions.
   **Petrobot** (Apache 2.0). Refract is a fork; the original licence and NOTICE are kept.
 - **Fonts**: [Inter and Inter Display](https://rsms.me/inter/) by The Inter Project Authors (SIL OFL 1.1).
 - **Code**: [QR Code generator](https://www.nayuki.io/page/qr-code-generator-library) by Project Nayuki (MIT).
-- **Photographs** ([Pexels](https://www.pexels.com), Pexels License): Sophia Zheng, Magic K, Phil
-  Evenden, Mo Eid, Marc Coenen, Atlantic Ambience, Ali Kazal, Beepin4, Vijit Bagh, Pixabay, İrem
-  Kızılarslan, Dominik Perau, Codioful (formerly Gradienta), S S, Aarin Husain, Septimiu Lupea and
-  Sergio Zhukov.
+- **Photographs** ([Pexels](https://www.pexels.com), Pexels License): Sophia Zheng, Magic K, gang liang, Paolo Bici, Necip Duman, Phil Evenden, Mo Eid, MART PRODUCTION, Stephen Leonardi, Dirk Pothen, Marc Coenen, Atlantic Ambience, Magda Ehlers, Kimmo Vainio, Jess Loiterton, Shreyaan Vashishtha, Ali Kazal, Beepin4, Martin G, Zaur Takhgiriev, Fidan Nazim qizi, eberhard grossgasteiger, Vijit Bagh, Pixabay, Elsie Soto, Erik Mclean, Manzoni Studios, Indigo, İrem Kızılarslan, Dominik Perau, Shovan Datta, Sergio Zhukov, Francesco Ungaro, Codioful (formerly Gradienta), S S, Aarin Husain, Jozef Papp, Koma Tang, Gammel Knecht, Viliam Kudelka, Septimiu Lupea, Plato Terentev, Fariborz MP and Chanita Sykes.
 - **Data**: [TMDB](https://www.themoviedb.org) (*this product uses the TMDB API but is not endorsed
   or certified by TMDB*), [JustWatch](https://www.justwatch.com), [Open-Meteo](https://open-meteo.com)
   and [MET Norway](https://api.met.no) (CC BY 4.0), [wttr.in](https://wttr.in) by Igor Chubin,

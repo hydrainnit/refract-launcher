@@ -331,7 +331,7 @@ final class Ambient extends FrameLayout {
     }
 
     int decodeWidth() {
-        return Math.min(1920, screenW);  // the bundled photos are 1920x1080
+        return lowRam ? Math.min(1920, screenW) : screenW;
     }
 
     // ---------------------------------------------------------------- photos
@@ -342,14 +342,18 @@ final class Ambient extends FrameLayout {
         Wallpapers.Photo p = photos.get(index);
         int gen = ++generation;
         io.execute(() -> {
-            Bitmap b = Wallpapers.decode(getContext(), p, decodeWidth());
+            Bitmap d = Wallpapers.decode(getContext(), p, decodeWidth());
+            // Not downloaded and no internet: one of Refract's gradients in its place.
+            Bitmap b = d != null ? d : MainActivity.makeWallpaperBase(theme.light ? "daylight"
+                    : MainActivity.WALL_KEYS[Math.floorMod(index, MainActivity.WALL_KEYS.length)]);
+            boolean photo = d != null;
             handler.post(() -> {
                 if (gen != generation || !running) return;
-                if (b != null) swap(b);
+                swap(b);
                 infoTitle.setText(p.title);
                 infoCredit.setText(p.credit());
                 infoCredit.setVisibility(s.attribution ? VISIBLE : GONE);
-                infoGroup.setVisibility(s.description || s.attribution ? VISIBLE : GONE);
+                infoGroup.setVisibility(photo && (s.description || s.attribution) ? VISIBLE : GONE);
                 infoTitle.setVisibility(s.description ? VISIBLE : GONE);
                 scheduleNext();
             });

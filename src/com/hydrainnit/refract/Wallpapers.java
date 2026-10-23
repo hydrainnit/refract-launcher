@@ -21,11 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Photographic wallpapers. A starter set of Pexels photos ships in the APK (assets/wallpapers,
- * 1920x1080 WebP, ~4.6 MB, with their metadata in index.json) so wallpapers work offline and with
- * no API key. A remote Pexels source uses the same Photo model and is off by default: Pexels API
- * access is paused, so nothing here makes a request unless PEXELS_API_PAUSED is false, the user
- * saved a key and switched remote wallpapers on.
+ * Photographic wallpapers. The APK ships only the starter set's metadata (assets/wallpapers/
+ * index.json: title, category, photographer, credit links); the pictures themselves are
+ * downloaded on the TV, straight from Pexels' image CDN (no API key, not the paused API), at the
+ * quality chosen in Settings (1080p or 4K), and kept in files/wallpapers/. A photo that has not
+ * been downloaded yet and no internet: callers get null and show Refract's gradients instead.
+ * A remote Pexels API source uses the same Photo model and is off by default: Pexels API access
+ * is paused, so nothing here calls the API unless PEXELS_API_PAUSED is false, the user saved a
+ * key and switched remote wallpapers on.
  *
  * Only metadata stays in memory. Pictures stay on disk and are decoded on demand at the size
  * they are shown (inSampleSize), by whoever displays them; this class keeps no bitmaps.
@@ -38,6 +41,8 @@ final class Wallpapers {
 
     static final String K_WALL = "wallpaper", K_CATEGORY = "wall_category", PHOTO = "photo:";
     static final String K_REMOTE = "pexels_remote";
+    /** Photo quality: "1080" (1920x1080, ~0.4 MB a photo) or "2160" (3840x2160, ~1.5 MB). */
+    static final String K_QUALITY = "photo_quality";
 
     static final class Category {
         final String id, name;
@@ -171,8 +176,9 @@ final class Wallpapers {
     // ------------------------------------------------------------------ decoding
 
     /**
-     * Decodes one photo no wider than maxWidth (a power-of-two sample of the 1920 px file), off the
-     * UI thread. The caller owns the bitmap and drops it when it is no longer shown.
+     * Decodes one photo no wider than maxWidth (a power-of-two sample of the downloaded file),
+     * off the UI thread, downloading it first if needed. Null when it is not on disk and there
+     * is no internet: show the gradient instead. The caller owns the bitmap.
      */
     static Bitmap decode(Context c, Photo p, int maxWidth) {
         if (p == null) return null;
@@ -196,7 +202,129 @@ final class Wallpapers {
 
     private static InputStream open(Context c, Photo p) throws Exception {
         if (p.remote()) return new FileInputStream(new File(remoteDir(c), p.file));
-        return c.getAssets().open("wallpapers/" + p.file);
+        File f = local(c, p, true);
+        if (f == null) throw new java.io.FileNotFoundException(p.id);
+        return new FileInputStream(f);
+    }
+
+    // ------------------------------------------------------------------ on-device download
+
+    static String quality(Context c) {
+        return c.getSharedPreferences("wallpapers", Context.MODE_PRIVATE).getString(K_QUALITY, "1080");
+    }
+
+    static void setQuality(Context c, String q) {
+        c.getSharedPreferences("wallpapers", Context.MODE_PRIVATE).edit().putString(K_QUALITY, q).apply();
+    }
+
+    static File dir(Context c, String q) {
+        File d = new File(new File(c.getFilesDir(), "wallpapers"), q);
+        d.mkdirs();
+        return d;
+    }
+
+    private static String pexelsId(Photo p) {
+        int dot = p.file.lastIndexOf('.');
+        return dot > 0 ? p.file.substring(0, dot) : p.file;
+    }
+
+    /** True when this photo can be shown without the internet (at either quality). */
+    static boolean downloaded(Context c, Photo p) {
+        return p.remote() || new File(dir(c, "1080"), pexelsId(p) + ".jpg").exists()
+                || new File(dir(c, "2160"), pexelsId(p) + ".jpg").exists();
+    }
+
+    /**
+     * The photo's file at the chosen quality, downloading it first when {@code fetch} (off the UI
+     * thread only). Offline, the other quality is used if it is on disk; otherwise null.
+     */
+    static File local(Context c, Photo p, boolean fetch) {
+        String q = quality(c), other = q.equals("2160") ? "1080" : "2160";
+        String name = pexelsId(p) + ".jpg";
+        File want = new File(dir(c, q), name);
+        if (want.exists()) return want;
+        if (fetch && download(c, p, q, want)) {
+            new File(dir(c, other), name).delete();  // the other quality is no longer needed
+            return want;
+        }
+        File alt = new File(dir(c, other), name);
+        return alt.exists() ? alt : null;
+    }
+
+    private static final Object FETCH = new Object();
+
+    /** One photo from images.pexels.com, cropped to 16:9 by the CDN; written atomically. */
+    private static boolean download(Context c, Photo p, String q, File to) {
+        if (!online(c)) return false;
+        synchronized (FETCH) {  // one download at a time; a second caller then finds the file
+            if (to.exists()) return true;
+            String id = pexelsId(p);
+            int w = q.equals("2160") ? 3840 : 1920, h = w * 9 / 16;
+            File tmp = new File(to.getPath() + ".part");
+            HttpURLConnection con = null;
+            try {
+                con = (HttpURLConnection) new URL("https://images.pexels.com/photos/" + id + "/pexels-photo-" + id
+                        + ".jpeg?auto=compress&cs=tinysrgb&fit=crop&w=" + w + "&h=" + h).openConnection();
+                con.setConnectTimeout(8000);
+                con.setReadTimeout(20000);
+                if (con.getResponseCode() != 200) return false;
+                try (InputStream in = con.getInputStream(); OutputStream os = new FileOutputStream(tmp)) {
+                    byte[] buf = new byte[32768];
+                    for (int n; (n = in.read(buf)) > 0; ) os.write(buf, 0, n);
+                }
+                return tmp.length() > 0 && tmp.renameTo(to);
+            } catch (Exception e) {
+                return false;
+            } finally {
+                if (con != null) con.disconnect();
+                tmp.delete();
+            }
+        }
+    }
+
+    static boolean online(Context c) {
+        try {
+            android.net.ConnectivityManager cm = c.getSystemService(android.net.ConnectivityManager.class);
+            android.net.NetworkCapabilities nc = cm.getNetworkCapabilities(cm.getActiveNetwork());
+            return nc != null && nc.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * While online, fetches every photo Home and the screensaver can show: the background, and
+     * for a photo screensaver all the photos in its category (or its one photo), so the whole
+     * rotation still works when the internet is gone. Photos already on disk cost nothing. Off
+     * the UI thread.
+     */
+    static void prefetch(Context c) {
+        if (!online(c)) return;
+        Photo sel = selected(c);
+        if (sel != null && !sel.remote()) local(c, sel, true);
+        Ambient.Settings s = Ambient.Settings.load(c);
+        List<Photo> want = new ArrayList<>();
+        if (s.mode.equals(Ambient.SINGLE)) {
+            Photo p = byId(c, s.singleId);
+            if (p != null) want.add(p);
+        } else if (s.mode.equals(Ambient.PHOTOS)) {
+            want.addAll(inCategory(c, s.category));
+            if (want.isEmpty()) want.addAll(all(c));  // the screensaver falls back to every photo too
+        }
+        for (Photo p : want) {
+            if (!p.remote() && !online(c)) return;
+            if (!p.remote()) local(c, p, true);
+        }
+    }
+
+    /** Settings: space used by downloaded photos, in bytes. */
+    static long bytesOnDisk(Context c) {
+        long n = 0;
+        for (String q : new String[]{"1080", "2160"}) {
+            File[] fs = dir(c, q).listFiles();
+            if (fs != null) for (File f : fs) n += f.length();
+        }
+        return n;
     }
 
     // ------------------------------------------------------------------ optional Pexels source
